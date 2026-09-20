@@ -1,0 +1,80 @@
+module:
+  name: robohub-common
+  type: interfaces
+  version: 1.0.0
+  description: >
+    Core platform-independent interfaces for the RoboHub Platform.
+    Provides generic types, error codes, HAL abstractions, registry,
+    and platform initialization contracts. This module contains no
+    hardware-specific code and is shared across all platforms (Pico,
+    ESP32, STM32, Linux).
+
+  maintainer: "Aurel Miron"
+  license: "MIT"
+  created: "2026-09-20"
+
+build:
+  language: c
+  standard: c11
+
+  include_dirs:
+    - include/
+    - include/robohub/
+    - include/robohub/hal/
+    - include/robohub/drivers/
+    - ${CMAKE_BINARY_DIR}/generated/
+
+  source_dirs:
+    - src/
+    - src/platform/
+
+  sources:
+    - src/error.c
+    - src/platform/platform.c
+    - src/platform/registry.c
+
+exports:
+  headers:
+    - types.h
+    - error.h
+    - platform.h
+    - registry.h
+    - robohub/hal/gpio.h
+    - robohub/hal/i2c.h
+    - robohub/hal/spi.h
+    - robohub/hal/uart.h
+    - robohub/hal/rs485.h
+    - robohub/hal/timer.h
+
+dependencies:
+  required: []
+  optional: []
+
+config:
+  kconfig_fragments:
+    - Kconfig
+    - kconfig/hal/Kconfig.gpio
+    - kconfig/hal/Kconfig.i2c
+    - kconfig/hal/Kconfig.spi
+    - kconfig/hal/Kconfig.uart
+    - kconfig/hal/Kconfig.rs485
+    - kconfig/hal/Kconfig.timer
+
+tests:
+  enabled: true
+  test_dirs:
+    - tests/
+  test_files:
+    - tests/test_error.c
+    - tests/test_registry.c
+    - tests/test_platform.c
+
+metadata:
+  tags:
+    - core
+    - interfaces
+    - platform-independent
+    - hal
+    - registry
+  stability: stable
+  visibility: public

@@ -1,0 +1,7 @@
+menu "HAL I2C"
+
+config RH_HAL_I2C
+    bool "Enable HAL I2C interface"
+    default y
+
+endmenu

@@ -1,0 +1,7 @@
+menu "HAL Timer"
+
+config RH_HAL_TIMER
+    bool "Enable HAL Timer interface"
+    default y
+
+endmenu

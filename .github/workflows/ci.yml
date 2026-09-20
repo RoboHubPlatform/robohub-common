@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Configure
+        run: >-
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=Debug
+          -DBUILD_TESTING=ON
+          -DROBOHUB_KCONFIG_FILE=${{ github.workspace }}/ci/project.conf
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Verify generated configuration
+        run: |
+          grep -q '^#define CONFIG_ROBOHUB_COMMON 1$' build/generated/kconfig.h
+          grep -q '^#define CONFIG_RH_HAL_GPIO 1$' build/generated/kconfig.h
+          grep -q '^#define CONFIG_RH_HAL_I2C 0$' build/generated/kconfig.h
+          grep -q '^#define CONFIG_RH_HAL_SPI 1$' build/generated/kconfig.h
+
+      - name: Install
+        run: cmake --install build --prefix "$GITHUB_WORKSPACE/stage"
+
+      - name: Verify installed files
+        run: |
+          test -f stage/include/types.h
+          test -f stage/include/error.h
+          test -f stage/include/platform.h
+          test -f stage/include/registry.h
+          test -f stage/include/robohub/hal/gpio.h
+          test -f stage/lib/librobohub-common.a
+          test -f stage/share/robohub-common/module.yml

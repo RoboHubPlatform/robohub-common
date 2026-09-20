@@ -1,0 +1,10 @@
+menu "RoboHub Common"
+
+config ROBOHUB_COMMON
+    bool "Enable RoboHub Common Core"
+    default y
+    help
+        Core interfaces, HAL abstractions, registry, platform contract.
+        This module is always enabled and required by all platforms.
+
+endmenu
