@@ -5,13 +5,16 @@ project(robohub-common LANGUAGES C VERSION 1.0.0)
 include(CTest)
 
 # ---------------------------------------------------------------------------
-#  Load Kconfig (generate kconfig.h)
+#  Configuration
 # ---------------------------------------------------------------------------
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Kconfig.cmake)
-
-# Make generated kconfig.h visible to all sources
-include_directories(${CMAKE_BINARY_DIR}/generated)
+#
+# Nothing is merged here. Configuration is resolved by rho-kconfig and written
+# beside the sources that use it, and a build that wants it asks for it.
+#
+# It used to be a Python generator run from this file, producing a `kconfig.h`
+# that no source in this library included: the modules it declared belonged to a
+# board, and a library that implements interfaces has no business deciding what a
+# board has switched on.
 
 # ---------------------------------------------------------------------------
 #  Source directories
@@ -29,8 +32,6 @@ set(ROBOHUB_COMMON_SOURCES
 # ---------------------------------------------------------------------------
 
 add_library(robohub-common STATIC ${ROBOHUB_COMMON_SOURCES})
-
-add_dependencies(robohub-common kconfig_common)
 
 target_include_directories(robohub-common PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
