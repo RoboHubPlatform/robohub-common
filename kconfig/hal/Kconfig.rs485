@@ -2,6 +2,6 @@ menu "HAL RS485"
 
 config RH_HAL_RS485
     bool "Enable HAL RS485 interface"
-    default y
+    default n
 
 endmenu

@@ -2,6 +2,6 @@ menu "HAL UART"
 
 config RH_HAL_UART
     bool "Enable HAL UART interface"
-    default y
+    default n
 
 endmenu

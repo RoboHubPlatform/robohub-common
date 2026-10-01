@@ -2,6 +2,6 @@ menu "HAL SPI"
 
 config RH_HAL_SPI
     bool "Enable HAL SPI interface"
-    default y
+    default n
 
 endmenu

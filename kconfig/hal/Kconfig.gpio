@@ -2,6 +2,6 @@ menu "HAL GPIO"
 
 config RH_HAL_GPIO
     bool "Enable HAL GPIO interface"
-    default y
+    default n
 
 endmenu
