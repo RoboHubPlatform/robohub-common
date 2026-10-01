@@ -46,6 +46,29 @@ exports:
     - robohub/hal/rs485.h
     - robohub/hal/timer.h
 
+  # What this module exports to a build.
+  #
+  # A C dependency knows its own layout better than anything consuming it does,
+  # so it says: the target a consumer links, the directories its headers are in,
+  # and the variable a build file that predates the target asks for by name.
+  # Nothing downstream works this out by looking at the directory.
+  #
+  # `${PACKAGE_DIR}` stands for wherever this module is checked out, so a declared
+  # path is true on every machine rather than only the one that wrote it.
+  cmake:
+    target: "rho::robohub-common"
+    include_dirs:
+      - include
+      - include/robohub/hal
+    defines:
+      - "ROBOHUB_PLATFORM_AVAILABLE=1"
+    # The bridge, for a build file that asks for a header path by name rather
+    # than linking the target. Declared here rather than guessed by whoever reads
+    # it, because a guessed name is a name that will be wrong for the next
+    # dependency.
+    vars:
+      ROBOHUB_COMMON_INCLUDE_DIR: "${PACKAGE_DIR}/include"
+
 dependencies:
   required: []
   optional: []
@@ -78,3 +101,34 @@ metadata:
     - registry
   stability: stable
   visibility: public
+
+# The platforms that implement these interfaces.
+#
+# Enumerated here so that a project can be built for one it does not name. A
+# project says what it depends on, and that is where a build looks first; this is
+# the backup for the case where it named the interfaces and not the platform, which
+# is what a program written against the interfaces alone would say.
+#
+# The paths are relative to this module. A platform that is fetched instead is
+# found by name in the installed modules, so a declaration here is a convenience
+# and not a requirement.
+platforms:
+  - name: robohub-stm32
+    path: ../robohub-stm32
+    git: https://github.com/RoboHubPlatform/robohub-stm32
+    branch: main
+
+# When this module's tests are eligible to be built.
+#
+# They exercise the chip-independent half, which is ordinary portable C, so they
+# run on the machine doing the building. They are not eligible for a bare-metal
+# target: a hosted test links a hosted C library, and one built for a part has no
+# `_kill` or `_getpid` for it to resolve against.
+#
+# rho-target reads this and passes the decision to CMake, so a build is told which
+# tests it may register rather than inferring it from the presence of a test
+# directory.
+testing:
+  host_tests:
+    enabled: true
+    target_constraint: "native"

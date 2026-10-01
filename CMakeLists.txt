@@ -44,7 +44,21 @@ target_include_directories(robohub-common PUBLIC
 
 target_compile_features(robohub-common PUBLIC c_std_11)
 
-if(BUILD_TESTING)
+# These run on the machine doing the building, so they are only registered for a
+# hosted build. A bare-metal build links a C library that has no `_kill` or
+# `_getpid` for a host test to resolve against, and a test executable built there
+# reaches the link step looking for a C runtime startup rather than the board's —
+# which is reported as a missing `Reset_Handler`, a symbol this module has nothing
+# to do with.
+#
+# The flags come from rho-target, which read the `testing:` section of this
+# module's manifest. Building this project on its own with plain cmake defines
+# neither, and the tests are then not registered: a test is something a build is
+# told to run, not something every build inherits.
+if(RHO_BUILD_HOST_TESTS AND NOT RHO_TARGET_IS_BAREMETAL)
+    message(STATUS "[robohub-common] registering host unit tests")
+    enable_testing()
+
     add_executable(robohub-test-error tests/test_error.c)
     target_link_libraries(robohub-test-error PRIVATE robohub-common)
     add_test(NAME robohub-test-error COMMAND robohub-test-error)

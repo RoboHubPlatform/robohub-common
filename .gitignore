@@ -29,3 +29,7 @@ coverage/
 .vscode/
 .idea/
 .DS_Store
+
+# The configuration a build resolves, written beside the sources that use it.
+/.config
+include/generated/
