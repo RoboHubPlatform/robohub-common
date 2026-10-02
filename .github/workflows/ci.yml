@@ -20,25 +20,48 @@ jobs:
         with:
           python-version: "3.x"
 
+      # No -DROBOHUB_KCONFIG_FILE: nothing here merges configuration. This module
+      # declares interfaces, and the modules it used to declare belonged to a
+      # board — a library that implements interfaces has no business deciding what
+      # a board has switched on. rho-kconfig resolves configuration for a program
+      # that builds against this, and writes it where that program includes it.
+      #
+      # -DRHO_BUILD_HOST_TESTS=ON because the tests are guarded by it, and a
+      # guarded-out test is a test that does not run: without this the configure is
+      # clean, the build is clean, and `ctest` reports that it found no tests at
+      # all and passes. A "Test" step that verifies nothing while reporting success
+      # is worse than no step, because it is read as coverage.
+      #
+      # The flag is rho-target's — it reads the `testing:` section of this module's
+      # manifest — so this asks for what a build would ask for.
       - name: Configure
         run: >-
           cmake -S . -B build
           -DCMAKE_BUILD_TYPE=Debug
           -DBUILD_TESTING=ON
-          -DROBOHUB_KCONFIG_FILE=${{ github.workspace }}/ci/project.conf
+          -DRHO_BUILD_HOST_TESTS=ON
 
       - name: Build
         run: cmake --build build --parallel
 
+      # Three tests, and the count is asserted because "no tests were found" also
+      # passes: a ctest run that found nothing and a ctest run that passed
+      # everything are the same exit status, and only one of them is a check.
       - name: Test
-        run: ctest --test-dir build --output-on-failure
-
-      - name: Verify generated configuration
         run: |
-          grep -q '^#define CONFIG_ROBOHUB_COMMON 1$' build/generated/kconfig.h
-          grep -q '^#define CONFIG_RH_HAL_GPIO 1$' build/generated/kconfig.h
-          grep -q '^#define CONFIG_RH_HAL_I2C 0$' build/generated/kconfig.h
-          grep -q '^#define CONFIG_RH_HAL_SPI 1$' build/generated/kconfig.h
+          ctest --test-dir build --output-on-failure
+          found="$(ctest --test-dir build -N | grep -c 'Test *#')"
+          test "${found}" -gt 0 || { echo "no tests were registered" >&2; exit 1; }
+
+      # What this step used to check is gone on purpose: `219ddee` removed the
+      # generator that wrote `build/generated/kconfig.h`, along with the flags that
+      # drove it, because nothing in this library included the file it produced.
+      # The step kept checking for it anyway, so this job has failed on a missing
+      # file since the commit that removed it.
+      #
+      # What replaces it is the build itself: the library compiles, its tests run,
+      # and `ctest` is the check that it does what it says. Configuration is
+      # verified where it is resolved, by a program that builds against this.
 
       - name: Install
         run: cmake --install build --prefix "$GITHUB_WORKSPACE/stage"
