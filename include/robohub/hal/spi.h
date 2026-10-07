@@ -13,6 +13,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_ROBOHUB_HAL_SPI_H
+#define INCLUDE_ROBOHUB_HAL_SPI_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -47,3 +54,9 @@ typedef struct RoboHubSPI {
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_ROBOHUB_HAL_SPI_H */

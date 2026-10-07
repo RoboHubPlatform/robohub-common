@@ -13,6 +13,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_ROBOHUB_HAL_UART_H
+#define INCLUDE_ROBOHUB_HAL_UART_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -49,3 +56,9 @@ typedef struct RoboHubUART {
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_ROBOHUB_HAL_UART_H */

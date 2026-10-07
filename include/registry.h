@@ -14,6 +14,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_REGISTRY_H
+#define INCLUDE_REGISTRY_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -76,3 +83,9 @@ RoboHubTimer* robohub_get_timer(rh_name name);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_REGISTRY_H */

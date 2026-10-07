@@ -14,6 +14,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_ROBOHUB_HAL_GPIO_H
+#define INCLUDE_ROBOHUB_HAL_GPIO_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -48,3 +55,9 @@ typedef struct RoboHubGPIO {
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_ROBOHUB_HAL_GPIO_H */

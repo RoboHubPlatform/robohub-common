@@ -16,6 +16,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_ERROR_H
+#define INCLUDE_ERROR_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -85,3 +92,9 @@ const char* robohub_error_to_string(RoboHubError err);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_ERROR_H */

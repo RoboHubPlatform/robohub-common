@@ -13,6 +13,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_TYPES_H
+#define INCLUDE_TYPES_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -79,3 +86,9 @@ typedef struct {
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_TYPES_H */

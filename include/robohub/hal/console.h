@@ -29,6 +29,13 @@
  * SPDX-License-Identifier: MIT
  */
 
+#ifndef INCLUDE_ROBOHUB_HAL_CONSOLE_H
+#define INCLUDE_ROBOHUB_HAL_CONSOLE_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #pragma once
 
 #ifdef __cplusplus
@@ -99,3 +106,9 @@ RoboHubConsoleError robohub_console_puts(const char* text);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INCLUDE_ROBOHUB_HAL_CONSOLE_H */
