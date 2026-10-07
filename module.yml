@@ -45,6 +45,7 @@ exports:
     - robohub/hal/rs485.h
     - robohub/hal/timer.h
     - robohub/hal/onewire.h
+    - robohub/osal.h
     - robohub/drivers/temperature.h
     - robohub/drivers/temperature_utils.h
 
