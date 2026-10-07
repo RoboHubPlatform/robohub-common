@@ -1,0 +1,7 @@
+menu "HAL OneWire"
+
+config RH_HAL_ONEWIRE
+    bool "Enable HAL OneWire interface"
+    default n
+
+endmenu

@@ -76,6 +76,25 @@ robohub-common/
 └── LICENSE
 ```
 
+## Module layout
+
+Every RoboHub module is laid out the same way, and the toolchain relies on it:
+
+- `include/` holds hand-written public headers, and nothing else. A module's
+  `build.include_dirs` names only directories here — plus any vendor include
+  directory the module ships, which is likewise hand-written or fetched, never
+  generated.
+- `src/` holds the sources and any private header. It is never on a consumer's
+  include path.
+- `module.yml`, `Kconfig`, `CMakeLists.txt`, `README.md` and `tests/` sit at the
+  module root.
+- Generated headers are written into the build tree (`<build>/include/generated/`)
+  and put on the compile path by the generated project. A module never keeps a
+  generated header in `include/`, and a manifest never names a build path: a
+  build path is not a directory that exists when the manifest is read, and
+  carrying one into a dependency's include list makes a path under the source
+  tree that no compiler can open.
+
 ## HAL Configuration (Kconfig)
 
 HAL configuration is split into modular Kconfig fragments under:
@@ -137,9 +156,16 @@ RoboHub Common uses:
 - tools/kconfig/kconfig_gen.py to generate generated/kconfig.h
 - kconfig/hal/* as HAL configuration fragments
 
-Include the generated header directory:
+The generated configuration header is written into the build tree, not into
+`include/`. A program includes it by name (`#include "autoconf.h"`) and the
+generated project puts its directory on the path:
 
-include_directories(${CMAKE_BINARY_DIR}/generated)
+```cmake
+target_include_directories(<program> PRIVATE ${RHO_CONFIG_OUT}/include/generated)
+```
+
+A module that needs a configured value branches on it in C or, where the value
+chooses a source, leaves that source out of its CMake.
 
 Use configuration flags in code:
 

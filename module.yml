@@ -22,7 +22,6 @@ build:
     - include/robohub/
     - include/robohub/hal/
     - include/robohub/drivers/
-    - ${CMAKE_BINARY_DIR}/generated/
 
   source_dirs:
     - src/
@@ -45,6 +44,9 @@ exports:
     - robohub/hal/uart.h
     - robohub/hal/rs485.h
     - robohub/hal/timer.h
+    - robohub/hal/onewire.h
+    - robohub/drivers/temperature.h
+    - robohub/drivers/temperature_utils.h
 
   # What this module exports to a build.
   #
@@ -60,6 +62,7 @@ exports:
     include_dirs:
       - include
       - include/robohub/hal
+      - include/robohub/drivers
     defines:
       - "ROBOHUB_PLATFORM_AVAILABLE=1"
     # The bridge, for a build file that asks for a header path by name rather
@@ -82,6 +85,7 @@ config:
     - kconfig/hal/Kconfig.uart
     - kconfig/hal/Kconfig.rs485
     - kconfig/hal/Kconfig.timer
+    - kconfig/hal/Kconfig.onewire
 
 tests:
   enabled: true

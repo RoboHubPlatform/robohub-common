@@ -116,6 +116,7 @@ static Registry uart_registry;
 static Registry gpio_registry;
 static Registry rs485_registry;
 static Registry timer_registry;
+static Registry onewire_registry;
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                             */
@@ -129,6 +130,7 @@ void robohub_registry_init(void)
     registry_init_single(&gpio_registry);
     registry_init_single(&rs485_registry);
     registry_init_single(&timer_registry);
+    registry_init_single(&onewire_registry);
 }
 
 void robohub_registry_deinit(void)
@@ -139,6 +141,7 @@ void robohub_registry_deinit(void)
     registry_init_single(&gpio_registry);
     registry_init_single(&rs485_registry);
     registry_init_single(&timer_registry);
+    registry_init_single(&onewire_registry);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -175,6 +178,11 @@ RoboHubError robohub_register_timer(rh_name name, RoboHubTimer* instance)
     return registry_add(&timer_registry, name, instance);
 }
 
+RoboHubError robohub_register_onewire(rh_name name, RoboHubOneWire* instance)
+{
+    return registry_add(&onewire_registry, name, instance);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                 */
 /* -------------------------------------------------------------------------- */
@@ -207,4 +215,9 @@ RoboHubRS485* robohub_get_rs485(rh_name name)
 RoboHubTimer* robohub_get_timer(rh_name name)
 {
     return (RoboHubTimer*)registry_get(&timer_registry, name);
+}
+
+RoboHubOneWire* robohub_get_onewire(rh_name name)
+{
+    return (RoboHubOneWire*)registry_get(&onewire_registry, name);
 }
