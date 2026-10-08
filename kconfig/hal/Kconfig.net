@@ -1,0 +1,11 @@
+menu "HAL Network"
+
+config RH_NET
+    bool "Enable network interface and sockets"
+    default n
+    help
+      The network contract: an interface brought up by a platform, and sockets
+      opened over it. Middleware that speaks MQTT, HTTP or a websocket selects
+      it; a platform implements it over esp_netif, cyw43_arch and LwIP, or POSIX.
+
+endmenu

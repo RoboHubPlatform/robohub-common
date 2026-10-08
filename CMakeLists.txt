@@ -25,6 +25,7 @@ set(ROBOHUB_COMMON_SOURCES
 
     src/platform/platform.c
     src/platform/registry.c
+    src/platform/net.c
 )
 
 # ---------------------------------------------------------------------------
@@ -71,6 +72,16 @@ if(RHO_BUILD_HOST_TESTS AND NOT RHO_TARGET_IS_BAREMETAL)
     add_executable(robohub-test-platform tests/test_platform.c)
     target_link_libraries(robohub-test-platform PRIVATE robohub-common)
     add_test(NAME robohub-test-platform COMMAND robohub-test-platform)
+
+    add_executable(robohub-test-net-defaults tests/test_net_defaults.c)
+    target_link_libraries(robohub-test-net-defaults PRIVATE robohub-common)
+    add_test(NAME robohub-test-net-defaults COMMAND robohub-test-net-defaults)
+
+    # Implements the contract over POSIX in the test itself, so it overrides the
+    # weak defaults the way a platform does and exercises a real loopback socket.
+    add_executable(robohub-test-net-posix tests/test_net_posix.c)
+    target_link_libraries(robohub-test-net-posix PRIVATE robohub-common)
+    add_test(NAME robohub-test-net-posix COMMAND robohub-test-net-posix)
 endif()
 
 # ---------------------------------------------------------------------------

@@ -31,6 +31,7 @@ build:
     - src/error.c
     - src/platform/platform.c
     - src/platform/registry.c
+    - src/platform/net.c
 
 exports:
   headers:
@@ -46,6 +47,7 @@ exports:
     - robohub/hal/timer.h
     - robohub/hal/onewire.h
     - robohub/osal.h
+    - robohub/net.h
     - robohub/drivers/temperature.h
     - robohub/drivers/temperature_utils.h
 
@@ -87,6 +89,7 @@ config:
     - kconfig/hal/Kconfig.rs485
     - kconfig/hal/Kconfig.timer
     - kconfig/hal/Kconfig.onewire
+    - kconfig/hal/Kconfig.net
 
 tests:
   enabled: true
@@ -96,6 +99,8 @@ tests:
     - tests/test_error.c
     - tests/test_registry.c
     - tests/test_platform.c
+    - tests/test_net_defaults.c
+    - tests/test_net_posix.c
 
 metadata:
   tags:
