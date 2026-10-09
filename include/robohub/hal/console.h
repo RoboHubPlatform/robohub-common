@@ -103,6 +103,26 @@ RoboHubConsoleError robohub_console_write(const char* data, size_t len);
  */
 RoboHubConsoleError robohub_console_puts(const char* text);
 
+/**
+ * @brief Write bytes with no translation, for a frame rather than a line.
+ *
+ * A console is line-oriented: the C library buffers, and on some boards it
+ * rewrites the ends of lines. A frame is bytes, and either would corrupt it.
+ * This writes the same console raw, so a program's link and its text share one
+ * port — which is what a board with a single USB CDC has — and the console is
+ * still the console.
+ */
+RoboHubConsoleError robohub_console_write_raw(const uint8_t* data, size_t len);
+
+/**
+ * @brief Read one byte from the console, or -1 when none is waiting.
+ *
+ * Non-blocking, so a program's loop can drain the console as a link without
+ * parking on it. This is the read side of the same port `write_raw` writes:
+ * together they are a transport a program can be wired to.
+ */
+int robohub_console_read_byte(void);
+
 #ifdef __cplusplus
 }
 #endif
