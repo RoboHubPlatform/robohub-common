@@ -25,10 +25,12 @@ build:
 
   source_dirs:
     - src/
+    - src/hal/
     - src/platform/
 
   sources:
     - src/error.c
+    - src/hal/bus.c
     - src/platform/platform.c
     - src/platform/registry.c
     - src/platform/net.c
@@ -42,14 +44,20 @@ exports:
     - robohub/hal/gpio.h
     - robohub/hal/i2c.h
     - robohub/hal/spi.h
+    - robohub/hal/bus.h
     - robohub/hal/uart.h
     - robohub/hal/rs485.h
     - robohub/hal/timer.h
     - robohub/hal/onewire.h
+    - robohub/hal/dht.h
     - robohub/osal.h
     - robohub/net.h
     - robohub/drivers/temperature.h
     - robohub/drivers/temperature_utils.h
+    - robohub/drivers/pressure.h
+    - robohub/drivers/pressure_utils.h
+    - robohub/drivers/altitude.h
+    - robohub/drivers/humidity.h
 
   # What this module exports to a build.
   #
@@ -89,6 +97,7 @@ config:
     - kconfig/hal/Kconfig.rs485
     - kconfig/hal/Kconfig.timer
     - kconfig/hal/Kconfig.onewire
+    - kconfig/hal/Kconfig.dht
     - kconfig/hal/Kconfig.net
 
 tests:

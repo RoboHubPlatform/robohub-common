@@ -1,0 +1,7 @@
+menu "HAL DHT"
+
+config RH_HAL_DHT
+    bool "Enable HAL DHT single-wire interface"
+    default n
+
+endmenu

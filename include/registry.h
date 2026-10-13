@@ -40,6 +40,7 @@ extern "C" {
 #include "robohub/hal/rs485.h"
 #include "robohub/hal/timer.h"
 #include "robohub/hal/onewire.h"
+#include "robohub/hal/dht.h"
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                            */
@@ -70,6 +71,7 @@ RoboHubError robohub_register_gpio(rh_name name, RoboHubGPIO* instance);
 RoboHubError robohub_register_rs485(rh_name name, RoboHubRS485* instance);
 RoboHubError robohub_register_timer(rh_name name, RoboHubTimer* instance);
 RoboHubError robohub_register_onewire(rh_name name, RoboHubOneWire* instance);
+RoboHubError robohub_register_dht(rh_name name, RoboHubDHT* instance);
 
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                */
@@ -82,6 +84,7 @@ RoboHubGPIO* robohub_get_gpio(rh_name name);
 RoboHubRS485* robohub_get_rs485(rh_name name);
 RoboHubTimer* robohub_get_timer(rh_name name);
 RoboHubOneWire* robohub_get_onewire(rh_name name);
+RoboHubDHT* robohub_get_dht(rh_name name);
 
 /* -------------------------------------------------------------------------- */
 /*  Counts                                                                    */
@@ -101,6 +104,7 @@ rh_size robohub_count_gpio(void);
 rh_size robohub_count_rs485(void);
 rh_size robohub_count_timer(void);
 rh_size robohub_count_onewire(void);
+rh_size robohub_count_dht(void);
 
 #ifdef __cplusplus
 }

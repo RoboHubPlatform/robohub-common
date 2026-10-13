@@ -17,13 +17,17 @@ RoboHub Common is always enabled and required by the entire ecosystem.
 ### Core Interfaces
 - Unified type system (`rh_u8`, `rh_size`, `rh_name`, etc.)
 - Centralized error model (`RoboHubError`)
-- Hardware Abstraction Layer (HAL) interfaces:
-  - GPIO
-  - I2C
-  - SPI
-  - UART
-  - RS485
-  - Timer
+ - Hardware Abstraction Layer (HAL) interfaces:
+   - GPIO
+   - I2C
+   - SPI
+   - UART
+   - RS485
+   - Timer
+   - OneWire
+   - DHT (single-wire, timing-only)
+ - The common register bus (`RoboHubBus`), one contract over I2C and SPI
+ - Driver interfaces a device presents: temperature, pressure, altitude, humidity
 
 ### Platform Abstractions
 - Platform initialization contract

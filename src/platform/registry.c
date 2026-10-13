@@ -117,6 +117,7 @@ static Registry gpio_registry;
 static Registry rs485_registry;
 static Registry timer_registry;
 static Registry onewire_registry;
+static Registry dht_registry;
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                             */
@@ -131,6 +132,7 @@ void robohub_registry_init(void)
     registry_init_single(&rs485_registry);
     registry_init_single(&timer_registry);
     registry_init_single(&onewire_registry);
+    registry_init_single(&dht_registry);
 }
 
 void robohub_registry_deinit(void)
@@ -142,6 +144,7 @@ void robohub_registry_deinit(void)
     registry_init_single(&rs485_registry);
     registry_init_single(&timer_registry);
     registry_init_single(&onewire_registry);
+    registry_init_single(&dht_registry);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -183,6 +186,11 @@ RoboHubError robohub_register_onewire(rh_name name, RoboHubOneWire* instance)
     return registry_add(&onewire_registry, name, instance);
 }
 
+RoboHubError robohub_register_dht(rh_name name, RoboHubDHT* instance)
+{
+    return registry_add(&dht_registry, name, instance);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                 */
 /* -------------------------------------------------------------------------- */
@@ -222,6 +230,11 @@ RoboHubOneWire* robohub_get_onewire(rh_name name)
     return (RoboHubOneWire*)registry_get(&onewire_registry, name);
 }
 
+RoboHubDHT* robohub_get_dht(rh_name name)
+{
+    return (RoboHubDHT*)registry_get(&dht_registry, name);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Counts                                                                    */
 /* -------------------------------------------------------------------------- */
@@ -240,3 +253,4 @@ rh_size robohub_count_gpio(void)    { return registry_count(&gpio_registry); }
 rh_size robohub_count_rs485(void)   { return registry_count(&rs485_registry); }
 rh_size robohub_count_timer(void)   { return registry_count(&timer_registry); }
 rh_size robohub_count_onewire(void) { return registry_count(&onewire_registry); }
+rh_size robohub_count_dht(void)     { return registry_count(&dht_registry); }
