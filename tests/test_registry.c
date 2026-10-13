@@ -10,9 +10,19 @@ int main(void)
 
     robohub_registry_init();
 
+    /* Nothing is registered, so every kind is empty — the question a smoke asks
+     * before a platform has brought anything up. */
+    assert(robohub_count_gpio() == 0);
+    assert(robohub_count_i2c() == 0);
+    assert(robohub_count_timer() == 0);
+
     assert(robohub_get_gpio("missing") == NULL);
     assert(robohub_register_gpio(NULL, &gpio) == ROBOHUB_ERR_INVALID_ARG);
     assert(robohub_register_gpio(mutable_name, &gpio) == ROBOHUB_OK);
+
+    /* A registered instance is counted, and only its own kind. */
+    assert(robohub_count_gpio() == 1);
+    assert(robohub_count_i2c() == 0);
 
     mutable_name[0] = 'X';
     assert(robohub_get_gpio("GPIO_MAIN") == &gpio);

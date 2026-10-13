@@ -221,3 +221,22 @@ RoboHubOneWire* robohub_get_onewire(rh_name name)
 {
     return (RoboHubOneWire*)registry_get(&onewire_registry, name);
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Counts                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/** How many instances one kind has. A board has one name per bus, so presence
+ *  is the question a smoke can answer, and the name is not its business. */
+static rh_size registry_count(const Registry* reg)
+{
+    return reg->count;
+}
+
+rh_size robohub_count_i2c(void)     { return registry_count(&i2c_registry); }
+rh_size robohub_count_spi(void)     { return registry_count(&spi_registry); }
+rh_size robohub_count_uart(void)    { return registry_count(&uart_registry); }
+rh_size robohub_count_gpio(void)    { return registry_count(&gpio_registry); }
+rh_size robohub_count_rs485(void)   { return registry_count(&rs485_registry); }
+rh_size robohub_count_timer(void)   { return registry_count(&timer_registry); }
+rh_size robohub_count_onewire(void) { return registry_count(&onewire_registry); }

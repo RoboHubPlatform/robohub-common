@@ -83,6 +83,25 @@ RoboHubRS485* robohub_get_rs485(rh_name name);
 RoboHubTimer* robohub_get_timer(rh_name name);
 RoboHubOneWire* robohub_get_onewire(rh_name name);
 
+/* -------------------------------------------------------------------------- */
+/*  Counts                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @brief How many instances of each kind are registered.
+ *
+ * A smoke asks whether the platform brought a bus up at all — "is a OneWire bus
+ * registered" — without being configured with its name, and a board has one name
+ * per bus and no way to enumerate them from the outside.
+ */
+rh_size robohub_count_i2c(void);
+rh_size robohub_count_spi(void);
+rh_size robohub_count_uart(void);
+rh_size robohub_count_gpio(void);
+rh_size robohub_count_rs485(void);
+rh_size robohub_count_timer(void);
+rh_size robohub_count_onewire(void);
+
 #ifdef __cplusplus
 }
 #endif
