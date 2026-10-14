@@ -27,7 +27,11 @@ RoboHub Common is always enabled and required by the entire ecosystem.
    - OneWire
    - DHT (single-wire, timing-only)
  - The common register bus (`RoboHubBus`), one contract over I2C and SPI
+ - An RS485 bus built from a UART and a direction pin (`robohub/hal/rs485_uart.h`),
+   so a MAX485/USB-RS485 transceiver is a dependency and not a platform
  - Driver interfaces a device presents: temperature, pressure, altitude, humidity
+ - Device interfaces (`robohub/devices/`): device identity and an inverter/power
+   reading, the level a gateway lists a device at
 
 ### Platform Abstractions
 - Platform initialization contract

@@ -49,6 +49,17 @@ typedef struct RoboHubGPIO {
 } RoboHubGPIO;
 
 /* -------------------------------------------------------------------------- */
+/*  Pin modes                                                                 */
+/* -------------------------------------------------------------------------- */
+/* The two directions a caller asks for by name. A platform that also supports
+ * alternate functions may take further values for its own pins, but these two
+ * are the contract: a direction pin on a transceiver, a chip select, a reset
+ * line — code that just wants to drive or sense a pin asks for one of these and
+ * is not written for the chip. */
+#define ROBOHUB_GPIO_MODE_INPUT  0u
+#define ROBOHUB_GPIO_MODE_OUTPUT 1u
+
+/* -------------------------------------------------------------------------- */
 /*  Public API                                                                */
 /* -------------------------------------------------------------------------- */
 

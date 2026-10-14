@@ -23,7 +23,10 @@ include(CTest)
 set(ROBOHUB_COMMON_SOURCES
     src/error.c
 
+    src/devices/device.c
+
     src/hal/bus.c
+    src/hal/rs485_uart.c
 
     src/platform/platform.c
     src/platform/registry.c

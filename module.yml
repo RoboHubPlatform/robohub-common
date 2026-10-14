@@ -25,12 +25,15 @@ build:
 
   source_dirs:
     - src/
+    - src/devices/
     - src/hal/
     - src/platform/
 
   sources:
     - src/error.c
+    - src/devices/device.c
     - src/hal/bus.c
+    - src/hal/rs485_uart.c
     - src/platform/platform.c
     - src/platform/registry.c
     - src/platform/net.c
@@ -47,6 +50,7 @@ exports:
     - robohub/hal/bus.h
     - robohub/hal/uart.h
     - robohub/hal/rs485.h
+    - robohub/hal/rs485_uart.h
     - robohub/hal/timer.h
     - robohub/hal/onewire.h
     - robohub/hal/dht.h
@@ -58,6 +62,8 @@ exports:
     - robohub/drivers/pressure_utils.h
     - robohub/drivers/altitude.h
     - robohub/drivers/humidity.h
+    - robohub/devices/device.h
+    - robohub/devices/inverter.h
 
   # What this module exports to a build.
   #
