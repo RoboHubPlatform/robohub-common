@@ -69,6 +69,10 @@ exports:
     - robohub/drivers/tone.h
     - robohub/drivers/rgb.h
     - robohub/drivers/infrared.h
+    - robohub/drivers/infrared_receiver.h
+    - robohub/drivers/analog.h
+    - robohub/drivers/encoder.h
+    - robohub/drivers/pulse.h
     - robohub/devices/device.h
     - robohub/devices/inverter.h
     - robohub/devices/switch.h

@@ -30,7 +30,8 @@ RoboHub Common is always enabled and required by the entire ecosystem.
  - An RS485 bus built from a UART and a direction pin (`robohub/hal/rs485_uart.h`),
    so a MAX485/USB-RS485 transceiver is a dependency and not a platform
  - Driver interfaces a device presents: temperature, pressure, altitude, humidity,
-   button, light, tone, colour (rgb), infrared
+   button, light, tone, colour (rgb), infrared (sent and received), analog,
+   encoder, pulse
  - Analog and pulse outputs: an ADC (`robohub/hal/adc.h`) and a PWM
    (`robohub/hal/pwm.h`), for a part that reports a voltage or is dimmed
  - Device interfaces (`robohub/devices/`): device identity and an inverter/power
