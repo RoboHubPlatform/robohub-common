@@ -47,17 +47,7 @@ typedef struct RoboHubUART {
     RoboHubError (*read)(struct RoboHubUART* self,
                          rh_u8* data,
                          rh_size len);
-    /*
-     * Copy whatever has already arrived into `data`, up to `max_len`, and
-     * return how many bytes were copied. It never blocks and never waits: a
-     * byte that has not come yet is not an error, it is simply not there. This
-     * is the read a parser uses — a frame arrives over time, and a blocking read
-     * of a length nobody knows yet cannot be the way to see it. A platform that
-     * has no queued input returns zero.
-     *
-     * May be null on a platform that has only the blocking read; a caller that
-     * needs availability checks for null first.
-     */
+    /* Non-blocking: copy what has arrived up to max_len and return the count; may be null. */
     rh_size (*read_available)(struct RoboHubUART* self,
                               rh_u8* data,
                               rh_size max_len);

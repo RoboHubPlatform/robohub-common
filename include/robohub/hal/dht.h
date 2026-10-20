@@ -73,15 +73,7 @@ typedef struct RoboHubDHT {
     /* HAL operations */
     RoboHubError (*init)(struct RoboHubDHT* self);
     RoboHubError (*deinit)(struct RoboHubDHT* self);
-    /**
-     * Perform the start signal and read one frame.
-     *
-     * `data` receives `len` bytes in the order they arrived, most significant
-     * bit of each byte first — the frame as the part sent it. The driver checks
-     * the checksum and decides what the bytes mean. A part that does not answer
-     * — no response pulse after the start signal — is
-     * `ROBOHUB_ERR_NOT_FOUND`, which is the failure a caller can act on.
-     */
+    /* Perform the start signal and read one frame into `data`, `len` bytes. */
     RoboHubError (*read)(struct RoboHubDHT* self, rh_u8* data, rh_size len);
 } RoboHubDHT;
 

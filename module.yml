@@ -64,6 +64,8 @@ exports:
     - robohub/drivers/humidity.h
     - robohub/devices/device.h
     - robohub/devices/inverter.h
+    - robohub/devices/switch.h
+    - robohub/devices/actuator.h
 
   # What this module exports to a build.
   #

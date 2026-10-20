@@ -53,21 +53,12 @@ typedef struct RoboHubRS485 {
     RoboHubError (*read)(struct RoboHubRS485* self,
                          rh_u8* data,
                          rh_size len);
-    /*
-     * Read up to `len` bytes, giving up after `timeout_ms`. Fills `data` with
-     * as many bytes as arrived in that window and returns how many. A response
-     * that ends early is ordinary on a half-duplex bus — the answer is exactly
-     * as long as the device made it — so the count, not a fixed length, is the
-     * result. This is what a Modbus master reads a reply with.
-     *
-     * May be null on a platform that has only the blocking read.
-     */
+    /* Read up to `len` bytes within `timeout_ms`; returns how many arrived. */
     rh_size (*read_timed)(struct RoboHubRS485* self,
                           rh_u8* data,
                           rh_size len,
                           rh_u32 timeout_ms);
-    /* Drive or release the transceiver. `dir` is ROBOHUB_RS485_TX or _RX. A
-     * bus whose direction is automatic accepts the call and does nothing. */
+    /* Drive or release the transceiver: ROBOHUB_RS485_TX or _RX. */
     RoboHubError (*set_direction)(struct RoboHubRS485* self, rh_u32 dir);
 } RoboHubRS485;
 
