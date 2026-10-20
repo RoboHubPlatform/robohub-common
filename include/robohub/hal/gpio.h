@@ -56,8 +56,12 @@ typedef struct RoboHubGPIO {
  * are the contract: a direction pin on a transceiver, a chip select, a reset
  * line — code that just wants to drive or sense a pin asks for one of these and
  * is not written for the chip. */
-#define ROBOHUB_GPIO_MODE_INPUT  0u
+#define ROBOHUB_GPIO_MODE_INPUT 0u
 #define ROBOHUB_GPIO_MODE_OUTPUT 1u
+/* An input with the pull-up enabled. A part whose pin is open-drain or whose
+ * line floats — a 1-Wire bus, a DHT's data line, a button to ground — needs the
+ * pull-up, and which way a pin is wired is the board's to say. */
+#define ROBOHUB_GPIO_MODE_INPUT_PULLUP 2u
 
 /* -------------------------------------------------------------------------- */
 /*  Public API                                                                */
