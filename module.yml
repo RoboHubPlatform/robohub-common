@@ -54,6 +54,8 @@ exports:
     - robohub/hal/timer.h
     - robohub/hal/onewire.h
     - robohub/hal/dht.h
+    - robohub/hal/adc.h
+    - robohub/hal/pwm.h
     - robohub/osal.h
     - robohub/net.h
     - robohub/drivers/temperature.h
@@ -62,6 +64,11 @@ exports:
     - robohub/drivers/pressure_utils.h
     - robohub/drivers/altitude.h
     - robohub/drivers/humidity.h
+    - robohub/drivers/button.h
+    - robohub/drivers/light.h
+    - robohub/drivers/tone.h
+    - robohub/drivers/rgb.h
+    - robohub/drivers/infrared.h
     - robohub/devices/device.h
     - robohub/devices/inverter.h
     - robohub/devices/switch.h
@@ -106,6 +113,8 @@ config:
     - kconfig/hal/Kconfig.timer
     - kconfig/hal/Kconfig.onewire
     - kconfig/hal/Kconfig.dht
+    - kconfig/hal/Kconfig.adc
+    - kconfig/hal/Kconfig.pwm
     - kconfig/hal/Kconfig.net
 
 tests:

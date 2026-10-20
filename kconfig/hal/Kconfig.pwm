@@ -1,0 +1,7 @@
+menu "HAL PWM"
+
+config RH_HAL_PWM
+    bool "Enable HAL PWM interface"
+    default n
+
+endmenu

@@ -118,6 +118,8 @@ static Registry rs485_registry;
 static Registry timer_registry;
 static Registry onewire_registry;
 static Registry dht_registry;
+static Registry adc_registry;
+static Registry pwm_registry;
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                             */
@@ -133,6 +135,8 @@ void robohub_registry_init(void)
     registry_init_single(&timer_registry);
     registry_init_single(&onewire_registry);
     registry_init_single(&dht_registry);
+    registry_init_single(&adc_registry);
+    registry_init_single(&pwm_registry);
 }
 
 void robohub_registry_deinit(void)
@@ -145,6 +149,8 @@ void robohub_registry_deinit(void)
     registry_init_single(&timer_registry);
     registry_init_single(&onewire_registry);
     registry_init_single(&dht_registry);
+    registry_init_single(&adc_registry);
+    registry_init_single(&pwm_registry);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -191,6 +197,16 @@ RoboHubError robohub_register_dht(rh_name name, RoboHubDHT* instance)
     return registry_add(&dht_registry, name, instance);
 }
 
+RoboHubError robohub_register_adc(rh_name name, RoboHubADC* instance)
+{
+    return registry_add(&adc_registry, name, instance);
+}
+
+RoboHubError robohub_register_pwm(rh_name name, RoboHubPWM* instance)
+{
+    return registry_add(&pwm_registry, name, instance);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                 */
 /* -------------------------------------------------------------------------- */
@@ -235,6 +251,16 @@ RoboHubDHT* robohub_get_dht(rh_name name)
     return (RoboHubDHT*)registry_get(&dht_registry, name);
 }
 
+RoboHubADC* robohub_get_adc(rh_name name)
+{
+    return (RoboHubADC*)registry_get(&adc_registry, name);
+}
+
+RoboHubPWM* robohub_get_pwm(rh_name name)
+{
+    return (RoboHubPWM*)registry_get(&pwm_registry, name);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Counts                                                                    */
 /* -------------------------------------------------------------------------- */
@@ -254,3 +280,5 @@ rh_size robohub_count_rs485(void)   { return registry_count(&rs485_registry); }
 rh_size robohub_count_timer(void)   { return registry_count(&timer_registry); }
 rh_size robohub_count_onewire(void) { return registry_count(&onewire_registry); }
 rh_size robohub_count_dht(void)     { return registry_count(&dht_registry); }
+rh_size robohub_count_adc(void)     { return registry_count(&adc_registry); }
+rh_size robohub_count_pwm(void)     { return registry_count(&pwm_registry); }

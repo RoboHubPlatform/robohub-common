@@ -35,5 +35,21 @@ int main(void)
     robohub_registry_deinit();
     assert(robohub_get_gpio("GPIO_MAIN") == NULL);
 
+    /* An analog converter and a PWM peripheral are their own kinds, each
+     * registered and found by name like every other instance. */
+    RoboHubADC adc = {0};
+    RoboHubPWM pwm = {0};
+    assert(robohub_count_adc() == 0);
+    assert(robohub_count_pwm() == 0);
+    assert(robohub_register_adc("adc0", &adc) == ROBOHUB_OK);
+    assert(robohub_register_pwm("pwm0", &pwm) == ROBOHUB_OK);
+    assert(robohub_get_adc("adc0") == &adc);
+    assert(robohub_get_pwm("pwm0") == &pwm);
+    assert(robohub_count_adc() == 1);
+    assert(robohub_count_pwm() == 1);
+    /* Registering a name twice in the same kind is refused, as for any other. */
+    assert(robohub_register_adc("adc0", &adc) == ROBOHUB_ERR_BUSY);
+    assert(robohub_get_adc("pwm0") == NULL);
+
     return 0;
 }

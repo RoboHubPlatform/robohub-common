@@ -41,6 +41,8 @@ extern "C" {
 #include "robohub/hal/timer.h"
 #include "robohub/hal/onewire.h"
 #include "robohub/hal/dht.h"
+#include "robohub/hal/adc.h"
+#include "robohub/hal/pwm.h"
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                            */
@@ -72,6 +74,8 @@ RoboHubError robohub_register_rs485(rh_name name, RoboHubRS485* instance);
 RoboHubError robohub_register_timer(rh_name name, RoboHubTimer* instance);
 RoboHubError robohub_register_onewire(rh_name name, RoboHubOneWire* instance);
 RoboHubError robohub_register_dht(rh_name name, RoboHubDHT* instance);
+RoboHubError robohub_register_adc(rh_name name, RoboHubADC* instance);
+RoboHubError robohub_register_pwm(rh_name name, RoboHubPWM* instance);
 
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                */
@@ -85,6 +89,8 @@ RoboHubRS485* robohub_get_rs485(rh_name name);
 RoboHubTimer* robohub_get_timer(rh_name name);
 RoboHubOneWire* robohub_get_onewire(rh_name name);
 RoboHubDHT* robohub_get_dht(rh_name name);
+RoboHubADC* robohub_get_adc(rh_name name);
+RoboHubPWM* robohub_get_pwm(rh_name name);
 
 /* -------------------------------------------------------------------------- */
 /*  Counts                                                                    */
@@ -105,6 +111,8 @@ rh_size robohub_count_rs485(void);
 rh_size robohub_count_timer(void);
 rh_size robohub_count_onewire(void);
 rh_size robohub_count_dht(void);
+rh_size robohub_count_adc(void);
+rh_size robohub_count_pwm(void);
 
 #ifdef __cplusplus
 }

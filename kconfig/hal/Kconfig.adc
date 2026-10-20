@@ -1,0 +1,7 @@
+menu "HAL ADC"
+
+config RH_HAL_ADC
+    bool "Enable HAL ADC interface"
+    default n
+
+endmenu
