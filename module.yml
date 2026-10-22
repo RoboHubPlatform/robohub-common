@@ -172,3 +172,11 @@ testing:
   host_tests:
     enabled: true
     target_constraint: "native"
+
+docs:
+  title: RoboHub Common
+  section: foundations
+  order: "10"
+  index: docs/index.md
+  sources:
+    - docs/index.md
