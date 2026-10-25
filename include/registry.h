@@ -43,6 +43,7 @@ extern "C" {
 #include "robohub/hal/dht.h"
 #include "robohub/hal/adc.h"
 #include "robohub/hal/pwm.h"
+#include "robohub/hal/display.h"
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                            */
@@ -76,6 +77,7 @@ RoboHubError robohub_register_onewire(rh_name name, RoboHubOneWire* instance);
 RoboHubError robohub_register_dht(rh_name name, RoboHubDHT* instance);
 RoboHubError robohub_register_adc(rh_name name, RoboHubADC* instance);
 RoboHubError robohub_register_pwm(rh_name name, RoboHubPWM* instance);
+RoboHubError robohub_register_display(rh_name name, RoboHubDisplay* instance);
 
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                */
@@ -91,6 +93,7 @@ RoboHubOneWire* robohub_get_onewire(rh_name name);
 RoboHubDHT* robohub_get_dht(rh_name name);
 RoboHubADC* robohub_get_adc(rh_name name);
 RoboHubPWM* robohub_get_pwm(rh_name name);
+RoboHubDisplay* robohub_get_display(rh_name name);
 
 /* -------------------------------------------------------------------------- */
 /*  Counts                                                                    */

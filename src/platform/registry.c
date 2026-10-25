@@ -120,6 +120,7 @@ static Registry onewire_registry;
 static Registry dht_registry;
 static Registry adc_registry;
 static Registry pwm_registry;
+static Registry display_registry;
 
 /* -------------------------------------------------------------------------- */
 /*  Initialization                                                             */
@@ -207,6 +208,11 @@ RoboHubError robohub_register_pwm(rh_name name, RoboHubPWM* instance)
     return registry_add(&pwm_registry, name, instance);
 }
 
+RoboHubError robohub_register_display(rh_name name, RoboHubDisplay* instance)
+{
+    return registry_add(&display_registry, name, instance);
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Lookup API                                                                 */
 /* -------------------------------------------------------------------------- */
@@ -259,6 +265,11 @@ RoboHubADC* robohub_get_adc(rh_name name)
 RoboHubPWM* robohub_get_pwm(rh_name name)
 {
     return (RoboHubPWM*)registry_get(&pwm_registry, name);
+}
+
+RoboHubDisplay* robohub_get_display(rh_name name)
+{
+    return (RoboHubDisplay*)registry_get(&display_registry, name);
 }
 
 /* -------------------------------------------------------------------------- */
