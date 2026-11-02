@@ -77,7 +77,9 @@ typedef enum {
     ROBOHUB_DEVICE_GATEWAY  = 4,
     ROBOHUB_DEVICE_BATTERY  = 5,
     ROBOHUB_DEVICE_SWITCH   = 6,
-    ROBOHUB_DEVICE_ACTUATOR = 7
+    ROBOHUB_DEVICE_ACTUATOR = 7,
+    /** A switch with a power meter: a smart plug. */
+    ROBOHUB_DEVICE_PLUG     = 8
 } RoboHubDeviceKind;
 
 /* -------------------------------------------------------------------------- */

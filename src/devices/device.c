@@ -21,6 +21,7 @@ const char* robohub_device_kind_name(RoboHubDeviceKind kind)
     case ROBOHUB_DEVICE_BATTERY:  return "battery";
     case ROBOHUB_DEVICE_SWITCH:   return "switch";
     case ROBOHUB_DEVICE_ACTUATOR: return "actuator";
+    case ROBOHUB_DEVICE_PLUG:     return "plug";
     case ROBOHUB_DEVICE_UNKNOWN:
     default:                      return "unknown";
     }
