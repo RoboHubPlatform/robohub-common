@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/driver.v1.json",
+  "title": "A device driver",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "functions",
+        "build"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "driver"
+            }
+          }
+        },
+        "functions": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/functions"
+        },
+        "telemetry": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/telemetry"
+        },
+        "telemetry_fields": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/telemetry_fields"
+        },
+        "capabilities": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/capabilities"
+        },
+        "deployment": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/deployment"
+        },
+        "signals": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/signals"
+        }
+      }
+    }
+  ]
+}

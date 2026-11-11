@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/platform.v1.json",
+  "title": "A hardware platform",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "platform",
+        "hardware",
+        "build"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "platform"
+            }
+          }
+        },
+        "hardware": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/hardware"
+        }
+      }
+    }
+  ]
+}

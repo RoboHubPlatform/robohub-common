@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/provider.v1.json",
+  "title": "A Rho provider",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "main",
+        "provider"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "provider"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

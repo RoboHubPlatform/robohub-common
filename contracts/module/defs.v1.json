@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/defs.v1.json",
+  "title": "Structures a RoboHub module type adds",
+  "$defs": {
+    "signal": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "input",
+            "output"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "kinds": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/signal"
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "http_path": {
+          "type": "string"
+        },
+        "http_token": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "telemetry_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "device": {
+      "type": "object",
+      "description": "The equipment an integration speaks to. A device is not a driver: a driver reaches a part through the HAL, a device reaches the thing the part is in.",
+      "required": [
+        "kind",
+        "transports"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "inverter",
+            "meter",
+            "sensor",
+            "gateway",
+            "battery",
+            "switch",
+            "actuator",
+            "plug"
+          ]
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "transports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "board": {
+      "type": "object",
+      "properties": {
+        "designation": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "driver": {
+          "type": "string"
+        },
+        "mcu": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "core": {
+          "type": "string"
+        },
+        "preset": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "functions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "signal": {
+                "type": "string"
+              },
+              "position": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "pins": {
+          "type": "object"
+        },
+        "peripherals": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "resources": {
+          "type": "object"
+        },
+        "host": {
+          "type": "object"
+        },
+        "companion_mcu": {
+          "type": "object"
+        },
+        "programmer": {
+          "type": "object"
+        },
+        "flash": {
+          "type": "object"
+        },
+        "deploy": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "hardware": {
+      "type": "object",
+      "properties": {
+        "boards": {
+          "type": "string"
+        },
+        "supported": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presets": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "kconfig": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "type": "boolean"
+        },
+        "relay": {
+          "type": "boolean"
+        },
+        "node": {
+          "type": "boolean"
+        },
+        "edge": {
+          "type": "boolean"
+        },
+        "host": {
+          "type": "boolean"
+        },
+        "wireless": {
+          "type": "boolean"
+        },
+        "ethernet": {
+          "type": "boolean"
+        },
+        "sensor": {
+          "type": "boolean"
+        },
+        "buses": {
+          "type": "string"
+        },
+        "transports": {
+          "type": "string"
+        },
+        "links": {
+          "type": "string"
+        },
+        "deploy": {
+          "type": "string"
+        },
+        "measures": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "deployment": {
+      "type": "object",
+      "properties": {
+        "example": {
+          "type": "string"
+        },
+        "boards": {
+          "type": "string"
+        },
+        "binary": {
+          "type": "string"
+        },
+        "kconfig": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "apps_dir": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "application": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "keeper",
+            "keeper-hosted"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "route": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

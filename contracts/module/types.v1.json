@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/types.v1.json",
+  "title": "The module types of the RoboHub ecosystem",
+  "description": "The allowed values of module.type, and the schema each one is written to. A manifest validates against the core schema and against the one its type names.",
+  "type": "object",
+  "required": [
+    "module"
+  ],
+  "properties": {
+    "module": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "rho",
+            "module",
+            "component",
+            "plugin",
+            "provider",
+            "interfaces",
+            "platform",
+            "platform-board",
+            "driver",
+            "driver-board",
+            "device",
+            "runtime",
+            "middleware",
+            "collection"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "rho"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/rho.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "module"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/module.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "component"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/component.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "plugin"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/plugin.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "provider"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/provider.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "interfaces"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/interfaces.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "platform"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/platform.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "platform-board"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/platform-board.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "driver"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/driver.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "driver-board"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/driver-board.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "device"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/device.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "runtime"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/runtime.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "middleware"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/middleware.v1.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "properties": {
+              "type": {
+                "const": "collection"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "$ref": "https://robohub.org/schemas/module/collection.v1.json"
+      }
+    }
+  ]
+}

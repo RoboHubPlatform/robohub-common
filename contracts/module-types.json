@@ -1,0 +1,1031 @@
+{
+  "version": 1,
+  "types": {
+    "rho": {
+      "main": "required",
+      "fields": [
+        {
+          "name": "application",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "kind",
+              "required": true,
+              "kind": "string",
+              "allowed": [
+                "keeper",
+                "keeper-hosted"
+              ]
+            },
+            {
+              "name": "title",
+              "kind": "string"
+            },
+            {
+              "name": "description",
+              "kind": "string"
+            },
+            {
+              "name": "route",
+              "kind": "string"
+            },
+            {
+              "name": "port",
+              "kind": "string"
+            },
+            {
+              "name": "command",
+              "kind": "string"
+            }
+          ]
+        }
+      ],
+      "module_id": true
+    },
+    "interfaces": {
+      "native": true,
+      "required": [
+        "build"
+      ],
+      "module_id": true
+    },
+    "platform": {
+      "native": true,
+      "required": [
+        "platform",
+        "hardware",
+        "build"
+      ],
+      "fields": [
+        {
+          "name": "hardware",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "boards",
+              "kind": "string"
+            },
+            {
+              "name": "supported",
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            },
+            {
+              "name": "presets",
+              "kind": "string"
+            },
+            {
+              "name": "targets",
+              "kind": "string"
+            },
+            {
+              "name": "target",
+              "kind": "string"
+            },
+            {
+              "name": "kconfig",
+              "kind": "string"
+            }
+          ]
+        }
+      ],
+      "module_id": true
+    },
+    "platform-board": {
+      "native": true,
+      "required": [
+        "board",
+        "build",
+        "hardware"
+      ],
+      "fields": [
+        {
+          "name": "board",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "designation",
+              "kind": "string"
+            },
+            {
+              "name": "device",
+              "kind": "string"
+            },
+            {
+              "name": "category",
+              "kind": "string"
+            },
+            {
+              "name": "driver",
+              "kind": "string"
+            },
+            {
+              "name": "mcu",
+              "kind": "string"
+            },
+            {
+              "name": "family",
+              "kind": "string"
+            },
+            {
+              "name": "core",
+              "kind": "string"
+            },
+            {
+              "name": "preset",
+              "kind": "string"
+            },
+            {
+              "name": "target",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            },
+            {
+              "name": "functions",
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            },
+            {
+              "name": "connectors",
+              "kind": "list",
+              "item": {
+                "kind": "map",
+                "fields": [
+                  {
+                    "name": "name",
+                    "required": true,
+                    "kind": "string"
+                  },
+                  {
+                    "name": "signal",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "position",
+                    "kind": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "pins",
+              "kind": "map"
+            },
+            {
+              "name": "peripherals",
+              "kind": "list",
+              "item": {
+                "kind": "map"
+              }
+            },
+            {
+              "name": "resources",
+              "kind": "map"
+            },
+            {
+              "name": "host",
+              "kind": "map"
+            },
+            {
+              "name": "companion_mcu",
+              "kind": "map"
+            },
+            {
+              "name": "programmer",
+              "kind": "map"
+            },
+            {
+              "name": "flash",
+              "kind": "map"
+            },
+            {
+              "name": "deploy",
+              "kind": "map"
+            }
+          ]
+        },
+        {
+          "name": "hardware",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "boards",
+              "kind": "string"
+            },
+            {
+              "name": "supported",
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            },
+            {
+              "name": "presets",
+              "kind": "string"
+            },
+            {
+              "name": "targets",
+              "kind": "string"
+            },
+            {
+              "name": "target",
+              "kind": "string"
+            },
+            {
+              "name": "kconfig",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "capabilities",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "gateway",
+              "kind": "bool"
+            },
+            {
+              "name": "relay",
+              "kind": "bool"
+            },
+            {
+              "name": "node",
+              "kind": "bool"
+            },
+            {
+              "name": "edge",
+              "kind": "bool"
+            },
+            {
+              "name": "host",
+              "kind": "bool"
+            },
+            {
+              "name": "wireless",
+              "kind": "bool"
+            },
+            {
+              "name": "ethernet",
+              "kind": "bool"
+            },
+            {
+              "name": "sensor",
+              "kind": "bool"
+            },
+            {
+              "name": "buses",
+              "kind": "string"
+            },
+            {
+              "name": "transports",
+              "kind": "string"
+            },
+            {
+              "name": "links",
+              "kind": "string"
+            },
+            {
+              "name": "deploy",
+              "kind": "string"
+            },
+            {
+              "name": "measures",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "deployment",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "example",
+              "kind": "string"
+            },
+            {
+              "name": "boards",
+              "kind": "string"
+            },
+            {
+              "name": "binary",
+              "kind": "string"
+            },
+            {
+              "name": "kconfig",
+              "kind": "string"
+            },
+            {
+              "name": "method",
+              "kind": "string"
+            },
+            {
+              "name": "arch",
+              "kind": "string"
+            },
+            {
+              "name": "apps_dir",
+              "kind": "string"
+            },
+            {
+              "name": "user",
+              "kind": "string"
+            },
+            {
+              "name": "path",
+              "kind": "string"
+            }
+          ]
+        }
+      ],
+      "module_id": true
+    },
+    "driver": {
+      "native": true,
+      "required": [
+        "functions",
+        "build"
+      ],
+      "fields": [
+        {
+          "name": "signals",
+          "kind": "list",
+          "item": {
+            "kind": "map",
+            "fields": [
+              {
+                "name": "id",
+                "required": true,
+                "reject_null": true,
+                "kind": "string"
+              },
+              {
+                "name": "label",
+                "kind": "string"
+              },
+              {
+                "name": "direction",
+                "kind": "string",
+                "allowed": [
+                  "input",
+                  "output"
+                ]
+              },
+              {
+                "name": "unit",
+                "kind": "string"
+              },
+              {
+                "name": "field",
+                "kind": "string"
+              },
+              {
+                "name": "kinds",
+                "kind": "string"
+              },
+              {
+                "name": "summary",
+                "kind": "string"
+              }
+            ]
+          }
+        },
+        {
+          "name": "functions",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        },
+        {
+          "name": "telemetry",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "interface",
+              "kind": "string"
+            },
+            {
+              "name": "http_path",
+              "kind": "string"
+            },
+            {
+              "name": "http_token",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "telemetry_fields",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        },
+        {
+          "name": "capabilities",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "gateway",
+              "kind": "bool"
+            },
+            {
+              "name": "relay",
+              "kind": "bool"
+            },
+            {
+              "name": "node",
+              "kind": "bool"
+            },
+            {
+              "name": "edge",
+              "kind": "bool"
+            },
+            {
+              "name": "host",
+              "kind": "bool"
+            },
+            {
+              "name": "wireless",
+              "kind": "bool"
+            },
+            {
+              "name": "ethernet",
+              "kind": "bool"
+            },
+            {
+              "name": "sensor",
+              "kind": "bool"
+            },
+            {
+              "name": "buses",
+              "kind": "string"
+            },
+            {
+              "name": "transports",
+              "kind": "string"
+            },
+            {
+              "name": "links",
+              "kind": "string"
+            },
+            {
+              "name": "deploy",
+              "kind": "string"
+            },
+            {
+              "name": "measures",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "deployment",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "example",
+              "kind": "string"
+            },
+            {
+              "name": "boards",
+              "kind": "string"
+            },
+            {
+              "name": "binary",
+              "kind": "string"
+            },
+            {
+              "name": "kconfig",
+              "kind": "string"
+            },
+            {
+              "name": "method",
+              "kind": "string"
+            },
+            {
+              "name": "arch",
+              "kind": "string"
+            },
+            {
+              "name": "apps_dir",
+              "kind": "string"
+            },
+            {
+              "name": "user",
+              "kind": "string"
+            },
+            {
+              "name": "path",
+              "kind": "string"
+            }
+          ]
+        }
+      ],
+      "module_id": true
+    },
+    "driver-board": {
+      "native": true,
+      "required": [
+        "board",
+        "build"
+      ],
+      "fields": [
+        {
+          "name": "board",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "designation",
+              "kind": "string"
+            },
+            {
+              "name": "device",
+              "kind": "string"
+            },
+            {
+              "name": "category",
+              "kind": "string"
+            },
+            {
+              "name": "driver",
+              "kind": "string"
+            },
+            {
+              "name": "mcu",
+              "kind": "string"
+            },
+            {
+              "name": "family",
+              "kind": "string"
+            },
+            {
+              "name": "core",
+              "kind": "string"
+            },
+            {
+              "name": "preset",
+              "kind": "string"
+            },
+            {
+              "name": "target",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            },
+            {
+              "name": "functions",
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            },
+            {
+              "name": "connectors",
+              "kind": "list",
+              "item": {
+                "kind": "map",
+                "fields": [
+                  {
+                    "name": "name",
+                    "required": true,
+                    "kind": "string"
+                  },
+                  {
+                    "name": "signal",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "position",
+                    "kind": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "pins",
+              "kind": "map"
+            },
+            {
+              "name": "peripherals",
+              "kind": "list",
+              "item": {
+                "kind": "map"
+              }
+            },
+            {
+              "name": "resources",
+              "kind": "map"
+            },
+            {
+              "name": "host",
+              "kind": "map"
+            },
+            {
+              "name": "companion_mcu",
+              "kind": "map"
+            },
+            {
+              "name": "programmer",
+              "kind": "map"
+            },
+            {
+              "name": "flash",
+              "kind": "map"
+            },
+            {
+              "name": "deploy",
+              "kind": "map"
+            }
+          ]
+        },
+        {
+          "name": "functions",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        },
+        {
+          "name": "signals",
+          "kind": "list",
+          "item": {
+            "kind": "map",
+            "fields": [
+              {
+                "name": "id",
+                "required": true,
+                "reject_null": true,
+                "kind": "string"
+              },
+              {
+                "name": "label",
+                "kind": "string"
+              },
+              {
+                "name": "direction",
+                "kind": "string",
+                "allowed": [
+                  "input",
+                  "output"
+                ]
+              },
+              {
+                "name": "unit",
+                "kind": "string"
+              },
+              {
+                "name": "field",
+                "kind": "string"
+              },
+              {
+                "name": "kinds",
+                "kind": "string"
+              },
+              {
+                "name": "summary",
+                "kind": "string"
+              }
+            ]
+          }
+        },
+        {
+          "name": "telemetry",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "interface",
+              "kind": "string"
+            },
+            {
+              "name": "http_path",
+              "kind": "string"
+            },
+            {
+              "name": "http_token",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "capabilities",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "gateway",
+              "kind": "bool"
+            },
+            {
+              "name": "relay",
+              "kind": "bool"
+            },
+            {
+              "name": "node",
+              "kind": "bool"
+            },
+            {
+              "name": "edge",
+              "kind": "bool"
+            },
+            {
+              "name": "host",
+              "kind": "bool"
+            },
+            {
+              "name": "wireless",
+              "kind": "bool"
+            },
+            {
+              "name": "ethernet",
+              "kind": "bool"
+            },
+            {
+              "name": "sensor",
+              "kind": "bool"
+            },
+            {
+              "name": "buses",
+              "kind": "string"
+            },
+            {
+              "name": "transports",
+              "kind": "string"
+            },
+            {
+              "name": "links",
+              "kind": "string"
+            },
+            {
+              "name": "deploy",
+              "kind": "string"
+            },
+            {
+              "name": "measures",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "deployment",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "example",
+              "kind": "string"
+            },
+            {
+              "name": "boards",
+              "kind": "string"
+            },
+            {
+              "name": "binary",
+              "kind": "string"
+            },
+            {
+              "name": "kconfig",
+              "kind": "string"
+            },
+            {
+              "name": "method",
+              "kind": "string"
+            },
+            {
+              "name": "arch",
+              "kind": "string"
+            },
+            {
+              "name": "apps_dir",
+              "kind": "string"
+            },
+            {
+              "name": "user",
+              "kind": "string"
+            },
+            {
+              "name": "path",
+              "kind": "string"
+            }
+          ]
+        }
+      ],
+      "module_id": true
+    },
+    "device": {
+      "native": true,
+      "required": [
+        "device",
+        "build"
+      ],
+      "fields": [
+        {
+          "name": "device",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "kind",
+              "required": true,
+              "reject_null": true,
+              "kind": "string",
+              "allowed": [
+                "inverter",
+                "meter",
+                "sensor",
+                "gateway",
+                "battery",
+                "switch",
+                "actuator",
+                "plug"
+              ]
+            },
+            {
+              "name": "manufacturer",
+              "kind": "string"
+            },
+            {
+              "name": "model",
+              "kind": "string"
+            },
+            {
+              "name": "summary",
+              "kind": "string"
+            },
+            {
+              "name": "transports",
+              "required": true,
+              "kind": "list",
+              "item": {
+                "kind": "string"
+              }
+            }
+          ]
+        },
+        {
+          "name": "signals",
+          "kind": "list",
+          "item": {
+            "kind": "map",
+            "fields": [
+              {
+                "name": "id",
+                "required": true,
+                "reject_null": true,
+                "kind": "string"
+              },
+              {
+                "name": "label",
+                "kind": "string"
+              },
+              {
+                "name": "direction",
+                "kind": "string",
+                "allowed": [
+                  "input",
+                  "output"
+                ]
+              },
+              {
+                "name": "unit",
+                "kind": "string"
+              },
+              {
+                "name": "field",
+                "kind": "string"
+              },
+              {
+                "name": "kinds",
+                "kind": "string"
+              },
+              {
+                "name": "summary",
+                "kind": "string"
+              }
+            ]
+          }
+        },
+        {
+          "name": "telemetry",
+          "kind": "map",
+          "fields": [
+            {
+              "name": "interface",
+              "kind": "string"
+            },
+            {
+              "name": "http_path",
+              "kind": "string"
+            },
+            {
+              "name": "http_token",
+              "kind": "string"
+            }
+          ]
+        },
+        {
+          "name": "telemetry_fields",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        },
+        {
+          "name": "telemetry_http_fields",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        }
+      ],
+      "module_id": true,
+      "main": "optional"
+    },
+    "runtime": {
+      "native": true,
+      "required": [
+        "build"
+      ],
+      "module_id": true
+    },
+    "middleware": {
+      "native": true,
+      "required": [
+        "build"
+      ],
+      "module_id": true
+    },
+    "collection": {
+      "native": true,
+      "any_of": [
+        [
+          "modules"
+        ],
+        [
+          "devices"
+        ],
+        [
+          "generate"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "modules",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        },
+        {
+          "name": "devices",
+          "kind": "list",
+          "item": {
+            "kind": "string"
+          }
+        }
+      ],
+      "module_id": true
+    },
+    "module": {
+      "main": "required",
+      "module_id": true
+    },
+    "component": {
+      "main": "required",
+      "module_id": true
+    },
+    "plugin": {
+      "main": "required",
+      "module_id": true,
+      "required": [
+        "extends"
+      ]
+    },
+    "provider": {
+      "main": "required",
+      "module_id": true,
+      "required": [
+        "provider"
+      ]
+    }
+  }
+}

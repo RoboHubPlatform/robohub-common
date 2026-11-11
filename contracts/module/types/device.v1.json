@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/device.v1.json",
+  "title": "A device integration or application",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "device",
+        "build"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "device"
+            }
+          }
+        },
+        "device": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/device"
+        },
+        "signals": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/signals"
+        },
+        "telemetry": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/telemetry"
+        },
+        "telemetry_fields": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/telemetry_fields"
+        }
+      }
+    }
+  ],
+  "description": "A device is equipment a gateway lists and commands, or the firmware that equipment is built from. It is not a driver: a driver reaches a part through the HAL, a device reaches the equipment the part is in."
+}

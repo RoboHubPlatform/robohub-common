@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/platform-board.v1.json",
+  "title": "A platform board",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "board",
+        "hardware",
+        "build"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "platform-board"
+            }
+          }
+        },
+        "board": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/board"
+        },
+        "hardware": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/hardware"
+        },
+        "capabilities": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/capabilities"
+        },
+        "deployment": {
+          "$ref": "https://robohub.org/schemas/module/defs.v1.json#/$defs/deployment"
+        }
+      }
+    }
+  ]
+}

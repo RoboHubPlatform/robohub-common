@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://robohub.org/schemas/module/middleware.v1.json",
+  "title": "A middleware",
+  "allOf": [
+    {
+      "$ref": "https://robohub.org/schemas/module/core.v1.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "build"
+      ],
+      "properties": {
+        "module": {
+          "properties": {
+            "type": {
+              "const": "middleware"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
