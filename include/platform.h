@@ -33,6 +33,7 @@ extern "C" {
 extern "C" {
 #endif
 
+#include "types.h"
 #include "error.h"
 
 /**
@@ -54,6 +55,20 @@ RoboHubError robohub_platform_init(void);
  * registers them using the registry API.
  */
 RoboHubError robohub_board_register(void);
+
+/**
+ * @brief Fill `out` with `length` bytes no earlier call ever returned.
+ *
+ * A board's authenticated link (robohub-transport's secure.h) opens each session
+ * with a nonce, and a nonce that repeats lets an old session be replayed. A part
+ * with a hardware random source fills `out` from it; one without (an 8-bit part)
+ * combines a boot counter kept in non-volatile memory with the time since boot,
+ * which never repeats as a pair. Returns 0 when it filled `out`, and anything
+ * else when it could not, in which case no session is opened.
+ *
+ * Each platform MUST implement this function.
+ */
+int robohub_platform_nonce(rh_u8* out, rh_size length);
 
 #ifdef __cplusplus
 }
