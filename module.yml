@@ -1,6 +1,8 @@
 module:
   name: robohub-common
-  id: robohub-common
+  id: robohub.interfaces.common
+  previous_ids:
+    - robohub-common
   type: interfaces
   version: 1.0.0
   description: >

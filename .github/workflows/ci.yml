@@ -37,6 +37,12 @@ jobs:
       - name: No local paths
         run: toolchain/scripts/check-local-paths.sh .
 
+      # A module's id is what registries, lock files and saved plans refer to it by,
+      # so two modules with one id, or an id that is another's previous id, cannot
+      # both be true.
+      - name: Module ids
+        run: rho module ids .
+
       # tests/tests.yml declares the suite. The ctest kind configures with the
       # host tests switched on (they are guarded by RHO_BUILD_HOST_TESTS, and a
       # guarded-out test is a test that does not run), builds, runs, and fails a
