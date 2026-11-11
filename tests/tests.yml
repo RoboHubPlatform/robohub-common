@@ -1,0 +1,11 @@
+# robohub-common's tests, declared.
+#
+# The host tests of the interfaces: ordinary portable C, registered with CMake and
+# run on the machine doing the build. `rho test` is how they are run — the ctest
+# kind configures, builds and runs them, and fails a run that found none.
+name: robohub-common
+suites:
+  - name: unit
+    kind: ctest
+    tags: [unit, host]
+    ctest: {}
