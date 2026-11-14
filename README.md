@@ -211,6 +211,4 @@ See the LICENSE file for details.
 
 ## Maintainer
 
-Aurel Miron  
-RoboHub Platform Architect  
-Cluj-Napoca, Romania
+Aurel Miron
