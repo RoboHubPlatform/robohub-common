@@ -31,6 +31,8 @@ set(ROBOHUB_COMMON_SOURCES
     src/platform/platform.c
     src/platform/registry.c
     src/platform/net.c
+    src/platform/keystore.c
+    src/platform/keystore_core.c
 )
 
 # ---------------------------------------------------------------------------
@@ -87,6 +89,16 @@ if(RHO_BUILD_HOST_TESTS AND NOT RHO_TARGET_IS_BAREMETAL)
     add_executable(robohub-test-net-posix tests/test_net_posix.c)
     target_link_libraries(robohub-test-net-posix PRIVATE robohub-common)
     add_test(NAME robohub-test-net-posix COMMAND robohub-test-net-posix)
+
+    # The A/B keystore core over an in-memory backend that loses power on cue.
+    add_executable(robohub-test-keystore tests/test_keystore.c)
+    target_link_libraries(robohub-test-keystore PRIVATE robohub-common)
+    add_test(NAME robohub-test-keystore COMMAND robohub-test-keystore)
+
+    # No platform: the weak defaults answer that nothing is stored.
+    add_executable(robohub-test-keystore-default tests/test_keystore_default.c)
+    target_link_libraries(robohub-test-keystore-default PRIVATE robohub-common)
+    add_test(NAME robohub-test-keystore-default COMMAND robohub-test-keystore-default)
 endif()
 
 # ---------------------------------------------------------------------------

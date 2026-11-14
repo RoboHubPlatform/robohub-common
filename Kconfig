@@ -7,4 +7,21 @@ config ROBOHUB_COMMON
         Core interfaces, HAL abstractions, registry, platform contract.
         This module is always enabled and required by all platforms.
 
+config RH_PRODUCTION
+    bool "Production build (security hardening; some steps are irreversible)"
+    default n
+    help
+        Builds the image with the platform's production preset: on an ESP32,
+        flash encryption (release mode), secure boot v2 and NVS encryption; on
+        an RP2350, a signed image and the OTP file that enables secure boot;
+        on an STM32, nothing changes in the image, and `rho flash --production`
+        sets read-out protection level 1.
+
+        Off by default, and nothing irreversible happens at build time. The
+        irreversible steps (eFuses, OTP) happen only when the image is flashed
+        with `rho flash --production`, which prints every one of them and asks
+        for the board's name to be typed first, or - on an ESP32 - when the
+        production image first boots. See each platform's docs and
+        robohub/docs/architecture/security.md ("Production builds").
+
 endmenu

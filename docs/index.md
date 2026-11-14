@@ -53,3 +53,51 @@ repository and path it lives under. A name is what a person reads; an id is what
 a consumer keys on. A signal source is `<module.id>.<signal.id>` within a
 device instance, so two modules with the same name in different repositories are
 two sources rather than one.
+
+## The device keystore
+
+`robohub/keystore.h` is where a board keeps the device key it was rotated to
+(REKEY). Two functions:
+
+```c
+typedef struct { uint32_t epoch; uint8_t scope[8]; uint8_t key[16]; } rh_key_t;
+int rh_keystore_load(rh_key_t *out);         /* 0 found, -1 none */
+int rh_keystore_store(const rh_key_t *key);  /* 0 stored and verified, -1 not */
+```
+
+When load finds nothing the firmware uses its compiled-in key and
+`RH_DEVICE_KEY_EPOCH`. This module carries weak defaults that answer -1, so a
+platform without a store still links and a REKEY is answered "cannot rotate".
+
+`robohub/keystore_core.h` is the logic every platform shares: two A/B slots of
+one 40-byte record each (magic `RHK1`, a sequence number, the epoch, an opaque 8-byte scope, the key, a
+CRC32). A write goes to the slot that does not hold the newest valid record,
+with the next sequence number, and counts only once it has been read back and
+compared; a torn write, a flipped bit or an erased slot fails its CRC and is
+ignored, so power lost mid-write leaves the previous key in place. Sequence
+numbers compare modulo 2^32, so the counter wraps without a stale key winning.
+A platform supplies only a backend that reads, erases and writes one slot:
+
+| Platform | Where the slots are |
+|---|---|
+| robohub-pico | the last two 4 KiB flash sectors; the link fails if the image reaches them |
+| robohub-esp32 | NVS namespace `rh_keys`, blobs `a` and `b` |
+| robohub-stm32 | the last two bank-2 sectors on boards that reserve them (NUCLEO-H753ZI); the weak default elsewhere |
+| robohub-avr | the 80 bytes of EEPROM below the nonce counter |
+| robohub-linux | one 0600 file, replaced atomically |
+
+Every platform keystore object also defines `rh_keystore_platform`, which
+nothing else defines, and the platform's build names it undefined on the link
+(`--undefined=rh_keystore_platform`). That pulls the object out of the platform
+archive whatever the archive order, so its strong functions always replace the
+weak defaults; a static-archive link cannot quietly settle for "no store".
+
+`tests/test_keystore.c` runs the core over an in-memory backend that loses power
+on cue.
+
+## Production builds
+
+`CONFIG_RH_PRODUCTION` (declared in this module's `Kconfig`, off by default)
+asks a platform for its production preset. Building with it burns nothing; the
+irreversible steps are listed, and confirmed by typing the board's name, by
+`rho flash --production`. Each platform's docs say what its preset does.
