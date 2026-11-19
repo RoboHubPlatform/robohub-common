@@ -130,13 +130,32 @@ requirements:
       robohub-common shall carry the ecosystem's module contracts —
       contracts/module-types.json, which the Rho toolchain loads through the
       rho-robohub plugin, and the published core, type and shared-definition
-      schemas under contracts/module/ — with the device.kind words spelling the
-      RoboHubDeviceKind values of robohub/devices/device.h.
+      schemas under contracts/module/ — with the device.kind words of every
+      device that crosses the wire spelling the RoboHubDeviceKind values of
+      robohub/devices/device.h (COMM-0009 names the one kind that does not).
     rationale: The module types are the ecosystem's, not the toolchain's; one vocabulary for the wire number and the manifest word keeps a device the same thing in firmware and in Mesh.
     satisfies: [SYS-0067]
     decided_by: [robohub:ADR-0002]
     status: proposed
     verification: inspection
     owner: maintainer
-    changed: 2026-11-19
+    changed: 2026-11-20
     tags: [contracts, manifests]
+
+  - id: COMM-0009
+    title: The device contract admits coordinators and devices read only from their manifest
+    statement: >
+      The device module type shall allow `device.kind: coordinator` — a radio a
+      host drives, which has no RoboHubDeviceKind number because it never crosses
+      the wire — and shall not require a `build` section, so a device read only
+      from its manifest (an MQTT or Zigbee device, a coordinator) validates
+      without one; contracts/module-types.json and the published schemas shall
+      say the same.
+    rationale: The Zigbee coordinators and the S60ZBTPF are data Mesh reads, with no C code to build (robohub-devices ADR-0003); a contract that demands a build section or refuses the kind makes `rho module validate` refuse correct manifests.
+    satisfies: [SYS-0069, SYS-0067]
+    decided_by: [robohub:ADR-0017]
+    status: approved
+    verification: inspection
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, manifests, zigbee]

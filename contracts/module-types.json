@@ -835,8 +835,7 @@
     "device": {
       "native": true,
       "required": [
-        "device",
-        "build"
+        "device"
       ],
       "fields": [
         {
@@ -856,7 +855,8 @@
                 "battery",
                 "switch",
                 "actuator",
-                "plug"
+                "plug",
+                "coordinator"
               ]
             },
             {

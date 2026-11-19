@@ -9,8 +9,7 @@
     {
       "type": "object",
       "required": [
-        "device",
-        "build"
+        "device"
       ],
       "properties": {
         "module": {
@@ -35,5 +34,5 @@
       }
     }
   ],
-  "description": "A device is equipment a gateway lists and commands, or the firmware that equipment is built from. It is not a driver: a driver reaches a part through the HAL, a device reaches the equipment the part is in."
+  "description": "A device is equipment a gateway or an application lists and commands, or the firmware that equipment is built from. A device read only from its manifest (an MQTT or Zigbee device, a coordinator) has no build section. It is not a driver: a driver reaches a part through the HAL, a device reaches the equipment the part is in."
 }

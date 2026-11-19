@@ -89,7 +89,8 @@
             "battery",
             "switch",
             "actuator",
-            "plug"
+            "plug",
+            "coordinator"
           ]
         },
         "manufacturer": {

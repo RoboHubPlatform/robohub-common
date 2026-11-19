@@ -4,7 +4,7 @@ module:
   previous_ids:
     - robohub-common
   type: interfaces
-  version: 1.1.1
+  version: 1.2.0
   description: >
     Core platform-independent interfaces for the RoboHub Platform.
     Provides generic types, error codes, HAL abstractions, registry,
