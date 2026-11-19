@@ -166,7 +166,8 @@
                 "type": "string"
               },
               "position": {
-                "type": "string"
+                "type": ["integer", "string"],
+                "description": "Where the line sits on the board's header, counted from 1; manifests write it as a number"
               }
             },
             "additionalProperties": true
