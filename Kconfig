@@ -22,6 +22,6 @@ config RH_PRODUCTION
         with `rho flash --production`, which prints every one of them and asks
         for the board's name to be typed first, or - on an ESP32 - when the
         production image first boots. See each platform's docs and
-        robohub/docs/architecture/security.md ("Production builds").
+        robohub/docs/doc/architecture/security.md ("Production builds").
 
 endmenu

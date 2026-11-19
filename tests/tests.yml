@@ -5,6 +5,9 @@
 # kind configures, builds and runs them, and fails a run that found none.
 name: robohub-common
 suites:
+  # test_error.c, test_registry.c, test_platform.c, test_net_defaults.c,
+  # test_net_posix.c, test_keystore.c and test_keystore_default.c.
+  # @verifies COMM-0002, COMM-0003, COMM-0004, COMM-0005, COMM-0006, COMM-0007
   - name: unit
     kind: ctest
     tags: [unit, host]

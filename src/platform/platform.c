@@ -39,6 +39,7 @@ __attribute__((weak)) RoboHubError robohub_board_register(void)
 }
 #endif
 
+// @req COMM-0004
 RoboHubError robohub_platform_init(void)
 {
     /* Step 1: Initialize all registries */

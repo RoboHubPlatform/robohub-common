@@ -16,6 +16,7 @@
 
 #include "error.h"
 
+// @req COMM-0002
 const char* robohub_error_to_string(RoboHubError err)
 {
     switch (err) {

@@ -48,6 +48,7 @@ static void registry_init_single(Registry* reg)
     reg->capacity = 0;
 }
 
+// @req COMM-0003
 static RoboHubError registry_add(Registry* reg, rh_name name, void* instance)
 {
     if (!name || !instance)
@@ -126,6 +127,7 @@ static Registry display_registry;
 /*  Initialization                                                             */
 /* -------------------------------------------------------------------------- */
 
+// @req COMM-0003
 void robohub_registry_init(void)
 {
     registry_init_single(&i2c_registry);
@@ -140,6 +142,7 @@ void robohub_registry_init(void)
     registry_init_single(&pwm_registry);
 }
 
+// @req COMM-0003
 void robohub_registry_deinit(void)
 {
     registry_init_single(&i2c_registry);

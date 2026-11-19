@@ -46,6 +46,7 @@ static uint32_t get32(const uint8_t *p)
     return (uint32_t)p[0] | ((uint32_t)p[1] << 8) | ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
 }
 
+// @req COMM-0006
 uint32_t rh_keystore_crc32(const uint8_t *data, size_t len)
 {
     /* Bitwise rather than table-driven: 40 bytes are checked at boot and on a
@@ -70,6 +71,7 @@ void rh_keystore_encode(uint8_t *out, uint32_t sequence, const rh_key_t *key)
     put32(out + 36, rh_keystore_crc32(out, 36));
 }
 
+// @req COMM-0006
 int rh_keystore_decode(const uint8_t *record, uint32_t *sequence, rh_key_t *key)
 {
     if (memcmp(record, rh_keystore_magic, 4) != 0) {
@@ -125,6 +127,7 @@ static int rh_keystore_newest(const rh_keystore_backend_t *backend, uint32_t *se
     return newest;
 }
 
+// @req COMM-0006
 int rh_keystore_core_load(const rh_keystore_backend_t *backend, rh_key_t *out)
 {
     if (backend == 0 || backend->read == 0 || out == 0) {
@@ -140,6 +143,7 @@ int rh_keystore_core_load(const rh_keystore_backend_t *backend, rh_key_t *out)
     return 0;
 }
 
+// @req COMM-0006
 int rh_keystore_core_store(const rh_keystore_backend_t *backend, const rh_key_t *key)
 {
     if (backend == 0 || backend->read == 0 || backend->write == 0 || key == 0) {

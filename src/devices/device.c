@@ -11,6 +11,7 @@
 
 #include "robohub/devices/device.h"
 
+// @req COMM-0008
 const char* robohub_device_kind_name(RoboHubDeviceKind kind)
 {
     switch (kind) {

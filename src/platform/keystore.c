@@ -18,12 +18,14 @@
 #include "robohub/keystore.h"
 
 #if defined(__GNUC__) || defined(__clang__)
+// @req COMM-0007
 __attribute__((weak)) int rh_keystore_load(rh_key_t *out)
 {
     (void)out;
     return -1;
 }
 
+// @req COMM-0007
 __attribute__((weak)) int rh_keystore_store(const rh_key_t *key)
 {
     (void)key;

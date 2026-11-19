@@ -16,6 +16,10 @@ module:
   license: "MIT"
   created: "2026-09-20"
 
+# The common interfaces' requirements are numbered COMM-NNNN and serve the system
+# requirements robohub holds.
+requirements: { prefix: COMM, parent: robohub }
+
 build:
   language: c
   standard: c11
@@ -186,6 +190,6 @@ docs:
   title: RoboHub Common
   section: foundations
   order: "10"
-  index: docs/index.md
+  index: docs/doc/index.md
   sources:
-    - docs/index.md
+    - docs/doc/index.md

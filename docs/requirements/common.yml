@@ -1,0 +1,142 @@
+# What robohub-common does towards the system requirements: the interfaces every
+# platform implements and every driver, device and runtime module is written
+# against — types, errors, the HAL and its registry, the platform bring-up, the
+# network contract, the device keystore, and the module contracts the toolchain
+# reads. Written in the R5 backfill from the headers, the sources, the changelog
+# and the host tests; proposed until the maintainer approves them.
+level: NODE
+prefix: COMM
+title: Common interfaces
+requirements:
+  - id: COMM-0001
+    title: One hardware contract, with no hardware in it
+    statement: >
+      robohub-common shall declare the HAL — GPIO, I2C, SPI, the register bus,
+      UART, RS-485, timer, 1-Wire, DHT, ADC, PWM, console and network — and the
+      driver and device interfaces as portable C11 with no platform-specific
+      code, so that a driver written against them builds unchanged for every
+      platform that implements them.
+    rationale: >
+      Pico, ESP32, STM32, AVR and Linux boards run the same drivers
+      (robohub-drivers DRV-0001); what differs is the platform's implementation
+      of this contract, not the driver.
+    satisfies: [SYS-0046]
+    status: proposed
+    verification: inspection
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [hal, portability]
+
+  - id: COMM-0002
+    title: Every layer reports errors with one set of codes
+    statement: >
+      robohub-common shall define the RoboHubError codes every layer returns and
+      robohub_error_to_string shall name each one, answering "Unknown error" for
+      a value outside the set.
+    rationale: A driver's timeout must read the same in the runtime, the smoke and a log line as where it happened.
+    satisfies: [SYS-0050]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [errors]
+
+  - id: COMM-0003
+    title: HAL instances are registered and found by name
+    statement: >
+      The registry shall keep each HAL instance under a name, per kind, keeping
+      its own copy of the name; refuse a null name with ROBOHUB_ERR_INVALID_ARG
+      and a name already registered in the same kind with ROBOHUB_ERR_BUSY;
+      answer NULL for a name not registered; count the instances of each kind;
+      and forget every instance on init and deinit.
+    rationale: A driver names "i2c0" rather than reaching into a platform's structs, and the hardware smoke reports a bus as present by its count (robohub-core CORE-0010).
+    satisfies: [SYS-0046]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [hal, registry]
+
+  - id: COMM-0004
+    title: A failed board bring-up leaves nothing registered
+    statement: >
+      robohub_platform_init shall initialise the registries and call the board's
+      robohub_board_register, and when that fails shall return its error with no
+      instance left registered.
+    rationale: A board half brought up must not look, to a driver or the smoke, like one whose buses are there.
+    satisfies: [SYS-0050]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [platform]
+
+  - id: COMM-0005
+    title: With no network, the network contract says so
+    statement: >
+      A platform that does not implement the network contract shall get weak
+      defaults that report the network disconnected, answer
+      ROBOHUB_ERR_NOT_SUPPORTED to connecting, disconnecting, asking the address
+      and connecting a socket, create no socket, answer ROBOHUB_SOCKET_ERROR to
+      sending and receiving, and accept closing a null socket; a platform that
+      implements it replaces them with strong definitions.
+    rationale: A board without Wi-Fi links the same telemetry code and is told plainly that it has no network, instead of failing to link.
+    satisfies: [SYS-0048]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [hal, network]
+
+  - id: COMM-0006
+    title: A rotated key survives a write cut short
+    statement: >
+      The keystore core shall keep a key in two A/B slots of 40-byte records
+      (magic "RHK1", sequence, epoch, scope, key, CRC32), write a new key with the
+      next sequence number to the slot not holding the newest valid record, read
+      it back and compare before reporting it stored, ignore a slot whose magic
+      or CRC does not match, and take the newer of two valid slots by sequence
+      compared modulo 2^32.
+    rationale: >
+      A board stores the key its gateway rotated it to (robohub-transport
+      TRAN-0004); a power loss mid-write must leave the previous key, and a
+      flipped bit must not make a wrong key the newest.
+    satisfies: [SYS-0022]
+    decided_by: [robohub:ADR-0010]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [keystore, security, key-rotation]
+
+  - id: COMM-0007
+    title: A platform with no keystore cannot rotate
+    statement: >
+      A platform that defines no keystore shall link weak rh_keystore_load and
+      rh_keystore_store that both return -1, so its firmware keeps its
+      compiled-in key and answers a REKEY with "cannot rotate".
+    rationale: The gateway records such a board as unable to rotate rather than asking it forever (GW-SEC-0010).
+    satisfies: [SYS-0022]
+    decided_by: [robohub:ADR-0010]
+    status: proposed
+    verification: test
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [keystore, key-rotation]
+
+  - id: COMM-0008
+    title: The module contracts are declared here
+    statement: >
+      robohub-common shall carry the ecosystem's module contracts —
+      contracts/module-types.json, which the Rho toolchain loads through the
+      rho-robohub plugin, and the published core, type and shared-definition
+      schemas under contracts/module/ — with the device.kind words spelling the
+      RoboHubDeviceKind values of robohub/devices/device.h.
+    rationale: The module types are the ecosystem's, not the toolchain's; one vocabulary for the wire number and the manifest word keeps a device the same thing in firmware and in Mesh.
+    satisfies: [SYS-0067]
+    decided_by: [robohub:ADR-0002]
+    status: proposed
+    verification: inspection
+    owner: maintainer
+    changed: 2026-11-19
+    tags: [contracts, manifests]

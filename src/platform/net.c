@@ -20,6 +20,7 @@
 #define ROBOHUB_WEAK
 #endif
 
+// @req COMM-0005
 ROBOHUB_WEAK RoboHubError robohub_net_wifi_connect(const RoboHubWiFiConfig* config)
 {
     (void)config;
@@ -31,6 +32,7 @@ ROBOHUB_WEAK RoboHubError robohub_net_wifi_disconnect(void)
     return ROBOHUB_ERR_NOT_SUPPORTED;
 }
 
+// @req COMM-0005
 ROBOHUB_WEAK RoboHubNetStatus robohub_net_status(void)
 {
     return ROBOHUB_NET_DISCONNECTED;
@@ -43,6 +45,7 @@ ROBOHUB_WEAK RoboHubError robohub_net_ip(char* out_ip, rh_size max_len)
     return ROBOHUB_ERR_NOT_SUPPORTED;
 }
 
+// @req COMM-0005
 ROBOHUB_WEAK RoboHubSocket robohub_socket_create(RoboHubSocketType type)
 {
     (void)type;
@@ -57,6 +60,7 @@ ROBOHUB_WEAK RoboHubError robohub_socket_connect(RoboHubSocket socket, const cha
     return ROBOHUB_ERR_NOT_SUPPORTED;
 }
 
+// @req COMM-0005
 ROBOHUB_WEAK int robohub_socket_send(RoboHubSocket socket, const void* data, rh_size len)
 {
     (void)socket;
