@@ -34,6 +34,7 @@ set(ROBOHUB_COMMON_SOURCES
     src/platform/keystore.c
     src/platform/keystore_core.c
     src/platform/health.c
+    src/platform/update_slot.c
 )
 
 # ---------------------------------------------------------------------------
@@ -111,6 +112,11 @@ if(RHO_BUILD_HOST_TESTS AND NOT RHO_TARGET_IS_BAREMETAL)
     add_executable(robohub-test-health tests/test_health.c)
     target_link_libraries(robohub-test-health PRIVATE robohub-common)
     add_test(NAME robohub-test-health COMMAND robohub-test-health)
+
+    # No platform: not updatable, and every call says so.
+    add_executable(robohub-test-update-slot-default tests/test_update_slot_default.c)
+    target_link_libraries(robohub-test-update-slot-default PRIVATE robohub-common)
+    add_test(NAME robohub-test-update-slot-default COMMAND robohub-test-update-slot-default)
 endif()
 
 # ---------------------------------------------------------------------------

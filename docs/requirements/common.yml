@@ -210,3 +210,25 @@ requirements:
     owner: maintainer
     changed: 2026-11-20
     tags: [contracts, health]
+
+  - id: COMM-0013
+    title: An update slot contract a platform implements
+    statement: >
+      robohub-common shall declare an update slot contract
+      (`robohub/update_slot.h`): whether the platform can take an image over the
+      link and how large its inactive slot is; begin an image of a given size,
+      write it in order, read it back; boot the inactive slot once; on the next
+      boot say whether the image running is one booted once and not yet confirmed,
+      confirm it, and say whether the last image booted once was kept or rolled
+      back; and hold the board's security version, raised only by a confirmed
+      image. The running slot shall never be written. A platform with no second
+      image shall answer that it is not updatable, through weak defaults, rather
+      than fail.
+    rationale: Each chip's own A/B mechanism behind one interface (robohub ADR-0021); the managed layer must not know which chip it runs on.
+    satisfies: [SYS-0072]
+    decided_by: [robohub:ADR-0021, robohub:ADR-0022]
+    status: approved
+    verification: test
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, updates]

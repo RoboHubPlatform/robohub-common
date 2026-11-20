@@ -7,8 +7,8 @@ name: robohub-common
 suites:
   # test_error.c, test_registry.c, test_platform.c, test_net_defaults.c,
   # test_net_posix.c, test_keystore.c, test_keystore_default.c, test_health.c
-  # and test_health_default.c.
-  # @verifies COMM-0002, COMM-0003, COMM-0004, COMM-0005, COMM-0006, COMM-0007, COMM-0010, COMM-0011, COMM-0012
+  # test_health_default.c and test_update_slot_default.c.
+  # @verifies COMM-0002, COMM-0003, COMM-0004, COMM-0005, COMM-0006, COMM-0007, COMM-0010, COMM-0011, COMM-0012, COMM-0013
   - name: unit
     kind: ctest
     tags: [unit, host]

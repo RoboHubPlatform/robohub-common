@@ -4,7 +4,7 @@ module:
   previous_ids:
     - robohub-common
   type: interfaces
-  version: 1.3.0
+  version: 1.4.0
   description: >
     Core platform-independent interfaces for the RoboHub Platform.
     Provides generic types, error codes, HAL abstractions, registry,
@@ -47,6 +47,7 @@ build:
     - src/platform/keystore.c
     - src/platform/keystore_core.c
     - src/platform/health.c
+    - src/platform/update_slot.c
 
 exports:
   headers:
@@ -71,6 +72,7 @@ exports:
     - robohub/keystore.h
     - robohub/keystore_core.h
     - robohub/health.h
+    - robohub/update_slot.h
     - robohub/drivers/temperature.h
     - robohub/drivers/temperature_utils.h
     - robohub/drivers/pressure.h
