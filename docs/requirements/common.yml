@@ -232,3 +232,19 @@ requirements:
     owner: maintainer
     changed: 2026-11-20
     tags: [contracts, updates]
+
+  - id: COMM-0014
+    title: An image on trial can be given up
+    statement: >
+      The update slot contract shall let the runtime give up an image booted
+      once and not confirmed (`rh_update_reject()`): the board restarts into the
+      image it ran before, and the next boot's outcome is rolled back. A platform
+      with no second image shall answer that it is not updatable.
+    rationale: An image that runs but never reaches its gateway would otherwise stay on trial for good; the managed layer gives up after a limit (robohub ADR-0023, 4).
+    satisfies: [SYS-0072]
+    decided_by: [robohub:ADR-0023]
+    status: approved
+    verification: test
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, updates]

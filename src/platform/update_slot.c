@@ -73,6 +73,12 @@ RH_WEAK RoboHubError rh_update_confirm(void)
     return ROBOHUB_ERR_NOT_SUPPORTED;
 }
 
+// @req COMM-0014
+RH_WEAK RoboHubError rh_update_reject(void)
+{
+    return ROBOHUB_ERR_NOT_SUPPORTED;
+}
+
 // @req COMM-0013
 RH_WEAK rh_update_outcome rh_update_take_outcome(rh_update_info *out)
 {

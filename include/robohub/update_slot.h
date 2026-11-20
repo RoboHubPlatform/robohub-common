@@ -18,6 +18,7 @@
  *   rh_update_pending(&info)       true: this image was booted once, unconfirmed
  *   rh_update_confirm()            kept: the board boots it from now on, and its
  *                                  security version becomes the board's
+ *   rh_update_reject()             or given up: the board restarts into the old one
  *   -- or the board resets before confirming --
  *   rh_update_take_outcome(&info)  RH_UPDATE_ROLLED_BACK, once
  *
@@ -101,6 +102,13 @@ bool rh_update_pending(rh_update_info *out);
  * version becomes the board's. ROBOHUB_ERR_STATE when nothing is pending.
  */
 RoboHubError rh_update_confirm(void);
+
+/**
+ * Give up the image running on trial (COMM-0014): the board restarts into the
+ * image it ran before, and the next boot's outcome is RH_UPDATE_ROLLED_BACK.
+ * Returns only when it could not: ROBOHUB_ERR_STATE when nothing is pending.
+ */
+RoboHubError rh_update_reject(void);
 
 /**
  * What became of the last image booted once, taken once: a second call answers

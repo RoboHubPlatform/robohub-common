@@ -11,7 +11,7 @@
 #include <assert.h>
 #include <string.h>
 
-// @verifies COMM-0013
+// @verifies COMM-0013, COMM-0014
 int main(void)
 {
     rh_update_caps caps;
@@ -27,6 +27,7 @@ int main(void)
     assert(rh_update_boot_once(&info) == ROBOHUB_ERR_NOT_SUPPORTED);
     assert(!rh_update_pending(&info));
     assert(rh_update_confirm() == ROBOHUB_ERR_NOT_SUPPORTED);
+    assert(rh_update_reject() == ROBOHUB_ERR_NOT_SUPPORTED);
     assert(rh_update_take_outcome(&info) == RH_UPDATE_NONE);
     assert(rh_update_security_version() == 0u);
     assert(rh_update_running_slot() == -1);
