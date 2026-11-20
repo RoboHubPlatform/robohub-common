@@ -11,3 +11,7 @@ A connector's `position` in the board contract (`contracts/module/defs.v1.json`)
 ## [1.2.0] - 2026-11-20
 
 The device contract admits `device.kind: coordinator` — a radio a host drives, such as a Zigbee USB dongle, which never crosses the wire and so has no `RoboHubDeviceKind` number — and no longer requires a `build` section, so a device read only from its manifest (an MQTT or Zigbee device, a coordinator) validates without one (COMM-0009). `contracts/module-types.json`, `module/defs.v1.json` and `module/types/device.v1.json` say the same.
+
+## [1.3.0] - 2026-11-20
+
+A health contract (`robohub/health.h`, COMM-0010..0012): the watchdog a platform has (or plainly has not), the reason of the last reset read once from the platform's flags, and a fault record with a boot count in memory a reset keeps, written by a fault handler and taken once at the next boot. Weak defaults keep a platform without the hardware linking: no watchdog, reason unknown, every boot a power-on.

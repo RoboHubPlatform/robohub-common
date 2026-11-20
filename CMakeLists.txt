@@ -33,6 +33,7 @@ set(ROBOHUB_COMMON_SOURCES
     src/platform/net.c
     src/platform/keystore.c
     src/platform/keystore_core.c
+    src/platform/health.c
 )
 
 # ---------------------------------------------------------------------------
@@ -99,6 +100,17 @@ if(RHO_BUILD_HOST_TESTS AND NOT RHO_TARGET_IS_BAREMETAL)
     add_executable(robohub-test-keystore-default tests/test_keystore_default.c)
     target_link_libraries(robohub-test-keystore-default PRIVATE robohub-common)
     add_test(NAME robohub-test-keystore-default COMMAND robohub-test-keystore-default)
+
+    # No platform: no watchdog, no flags, no retained memory, and it says so.
+    add_executable(robohub-test-health-default tests/test_health_default.c)
+    target_link_libraries(robohub-test-health-default PRIVATE robohub-common)
+    add_test(NAME robohub-test-health-default COMMAND robohub-test-health-default)
+
+    # The retained record across restarts: each boot a child process, the
+    # retained block a shared mapping that outlives it.
+    add_executable(robohub-test-health tests/test_health.c)
+    target_link_libraries(robohub-test-health PRIVATE robohub-common)
+    add_test(NAME robohub-test-health COMMAND robohub-test-health)
 endif()
 
 # ---------------------------------------------------------------------------

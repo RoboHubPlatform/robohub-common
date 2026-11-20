@@ -159,3 +159,54 @@ requirements:
     owner: maintainer
     changed: 2026-11-20
     tags: [contracts, manifests, zigbee]
+
+  - id: COMM-0010
+    title: A watchdog contract a platform implements
+    statement: >
+      robohub-common shall declare a watchdog contract (`robohub/health.h`):
+      whether the platform has one, starting it with a period in milliseconds (the
+      platform choosing the nearest period it supports and saying which), and
+      feeding it; a platform whose watchdog cannot be stopped once started shall
+      say so, and a platform without one shall answer that it has none rather than
+      pretend.
+    rationale: A node must be restarted when it hangs (RNODE-0008); the hardware differs per chip and the core must not know which.
+    satisfies: [SYS-0070, SYS-0072]
+    decided_by: [robohub:ADR-0021]
+    status: approved
+    verification: test
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, health, watchdog]
+
+  - id: COMM-0011
+    title: A portable reason for the last reset
+    statement: >
+      robohub-common shall declare the reasons a board can restart —
+      power-on, watchdog, software request, brown-out, external reset pin, fault,
+      unknown — and a call that answers the reason of the last reset, read from
+      the platform's own flags once at boot and the same on every later call.
+    rationale: Whether a board restarted because it lost power or because it hung is the first thing to know about it; each chip reports it in its own registers.
+    satisfies: [SYS-0070, SYS-0072]
+    decided_by: [robohub:ADR-0021]
+    status: approved
+    verification: test
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, health]
+
+  - id: COMM-0012
+    title: A fault record that survives a reset
+    statement: >
+      robohub-common shall declare a fault record — a code, the task that was
+      running, the program counter where the platform can give it, the uptime —
+      that a fault or watchdog-warning handler writes into memory a reset keeps,
+      and that is taken once at the next boot (taking it clears it); and a boot
+      count kept with it, raised at every boot and lost only with power.
+    rationale: A board that crashed must be able to say where, once, after it restarted; a boot count that jumps shows a board resetting in a loop.
+    satisfies: [SYS-0070, SYS-0072]
+    decided_by: [robohub:ADR-0021]
+    status: approved
+    verification: test
+    owner: maintainer
+    changed: 2026-11-20
+    tags: [contracts, health]
